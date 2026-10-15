@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Entraînement rythmique V10</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <section id="home" class="screen active">
+    <h1>ENTRAÎNEMENT RYTHMIQUE</h1>
+    <p class="subtitle">Choisissez le type de subdivision</p>
+    <button class="big blue" data-type="binaire">SUBDIVISION BINAIRE<br><small>2/4 · 3/4 · 4/4</small></button>
+    <button class="big violet" data-type="ternaire">SUBDIVISION TERNAIRE<br><small>6/8</small></button>
+    <p>Une manche comporte 10 questions.<br><strong>Objectif : 10 / 10 !</strong></p>
+  </section>
+
+  <section id="measures" class="screen">
+    <h1>CHOIX DE LA MESURE</h1>
+    <h2 id="typeTitle"></h2>
+    <p id="typeText"></p>
+    <div id="measureButtons"></div>
+    <button id="backType" class="secondary">← CHANGER DE TYPE</button>
+  </section>
+
+  <section id="game" class="screen">
+    <h1>ENTRAÎNEMENT RYTHMIQUE</h1>
+    <h2 id="measureTitle"></h2>
+    <button id="listen" class="listen">▶ ÉCOUTER / RÉÉCOUTER</button>
+    <p id="status" class="status"></p>
+    <div id="answers" class="answers"></div>
+    <p id="explanation" class="status"></p>
+    <div class="toolbar">
+      <strong id="scoreText">Score : 0 / 0 | 0 %</strong>
+      <button id="next" class="next" disabled>QUESTION SUIVANTE →</button>
+    </div>
+    <div class="toolbar">
+      <button id="changeMeasure" class="secondary">← CHANGER DE MESURE</button>
+      <button id="changeType" class="secondary">CHANGER DE SUBDIVISION</button>
+    </div>
+    <p class="help">A / B / C : répondre · ESPACE : réécouter · Tempo : noire = 80</p>
+  </section>
+</main>
+
+<div id="reward" class="reward" aria-hidden="true">
+  <div class="reward-card">
+    <span class="star s1">★</span><span class="star s2">★</span><span class="star s3">★</span><span class="star s4">★</span>
+    <h2>★ BRAVO ! ★</h2>
+    <div class="ten">10 / 10</div>
+    <h3>MANCHE PARFAITE !</h3>
+    <button id="replay" class="replay">REJOUER</button>
+  </div>
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
