@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -16,19 +18,19 @@
 
     <title>TheLabo · Laboratoire musical</title>
 
-    <style>
 
-        /* ==================================================
-           BASE
-           ================================================== */
+    <style>
 
         * {
             box-sizing: border-box;
         }
 
+
         :root {
             --fond: #a8aeb4;
             --carte: #c5cacf;
+            --texte: #111111;
+            --texte-secondaire: #41474c;
 
             --bleu: #8fb6cc;
             --bleu-hover: #729eb8;
@@ -36,19 +38,14 @@
             --vert: #91b89d;
             --vert-hover: #749b80;
 
-            --texte: #111111;
-            --texte-secondaire: #41474c;
-
             --bordure: #737b82;
-            --indisponible: #b9bdc1;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
 
         body {
+
             margin: 0;
+
             min-height: 100vh;
 
             font-family:
@@ -56,17 +53,22 @@
                 Helvetica,
                 sans-serif;
 
-            background: var(--fond);
-            color: var(--texte);
+            background:
+                var(--fond);
+
+            color:
+                var(--texte);
         }
 
 
-        /* ==================================================
-           CONTENEUR
-           ================================================== */
+        /* ==============================================
+           PAGE
+           ============================================== */
 
         .page {
+
             width: min(1000px, 94%);
+
             margin: 0 auto;
 
             padding:
@@ -78,105 +80,115 @@
         }
 
 
-        /* ==================================================
-           TITRE
-           ================================================== */
+        /* ==============================================
+           EN-TÊTE
+           ============================================== */
 
-        .logo {
+        h1 {
+
             margin: 0;
 
-            font-size: clamp(
-                44px,
-                8vw,
-                76px
-            );
+            font-size:
+                clamp(
+                    46px,
+                    8vw,
+                    76px
+                );
 
             font-weight: 800;
+
             letter-spacing: -2px;
         }
 
-        .logo span {
+
+        h1 span {
             color: #245b36;
         }
 
+
         .sous-titre {
-            margin:
-                5px
-                0
-                14px;
+
+            margin-top: 5px;
 
             font-size: 20px;
+
             font-weight: bold;
 
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
+
         .introduction {
+
             max-width: 620px;
 
             margin:
-                0
+                15px
                 auto
-                42px;
+                40px;
 
-            font-size: 16px;
-            line-height: 1.55;
+            line-height: 1.5;
 
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
 
-        /* ==================================================
-           TITRE DE SECTION
-           ================================================== */
-
         .titre-section {
+
             margin-bottom: 22px;
 
             font-size: 17px;
+
             font-weight: bold;
 
-            letter-spacing: 0.5px;
-
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
 
-        /* ==================================================
-           GRILLE
-           ================================================== */
+        /* ==============================================
+           JEUX
+           ============================================== */
 
         .jeux {
+
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    2,
-                    minmax(0, 1fr)
-                );
+                repeat(2, 1fr);
 
             gap: 22px;
 
             max-width: 800px;
+
             margin: 0 auto;
         }
 
 
-        /* ==================================================
-           CARTES CLIQUABLES
-           ================================================== */
+        /* ==============================================
+           CARTE
+
+           Important :
+           la carte elle-même est une balise <a>.
+           ============================================== */
 
         .carte {
+
             display: flex;
 
             flex-direction: column;
-            justify-content: space-between;
 
-            min-height: 300px;
+            justify-content:
+                space-between;
+
+            min-height: 290px;
 
             padding: 30px;
 
-            background: var(--carte);
+            background:
+                var(--carte);
 
             border:
                 2px solid
@@ -184,176 +196,173 @@
 
             border-radius: 15px;
 
-            color: var(--texte);
+            color:
+                var(--texte);
 
             text-decoration: none;
 
             transition:
-                transform 0.16s ease,
-                box-shadow 0.16s ease;
+                transform 0.15s ease,
+                box-shadow 0.15s ease;
         }
 
+
         .carte:hover {
-            transform: translateY(-5px);
+
+            transform:
+                translateY(-5px);
 
             box-shadow:
-                0
-                12px
-                28px
+                0 12px 28px
                 rgba(0, 0, 0, 0.16);
         }
 
-        .carte:active {
-            transform: translateY(-2px);
-        }
 
         .carte:focus-visible {
-            outline:
-                4px solid
-                #ffffff;
 
-            outline-offset: 4px;
+            outline:
+                4px solid white;
+
+            outline-offset:
+                4px;
         }
 
 
-        /* ==================================================
-           ICÔNES
-           ================================================== */
-
         .icone {
-            min-height: 58px;
 
             margin-bottom: 12px;
 
             font-size: 48px;
-            line-height: 1.1;
         }
 
 
-        /* ==================================================
-           CONTENU DES CARTES
-           ================================================== */
-
         .carte h2 {
+
             margin:
-                8px
-                0
-                12px;
+                10px
+                0;
 
             font-size: 27px;
         }
 
-        .carte p {
-            margin:
-                0
-                0
-                25px;
 
-            font-size: 15px;
+        .carte p {
+
             line-height: 1.5;
 
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
 
-        /* ==================================================
-           BOUTON VISUEL
-           ================================================== */
+        /* ==============================================
+           ZONE COMMENCER
+           ============================================== */
 
         .ouvrir {
+
             display: block;
 
-            width: 100%;
+            margin-top: 25px;
 
-            padding:
-                14px
-                15px;
+            padding: 14px;
 
             border-radius: 8px;
 
             font-size: 15px;
-            font-weight: bold;
 
-            transition:
-                background 0.15s ease;
+            font-weight: bold;
         }
 
-
-        /* ==================================================
-           COULEUR RYTHME
-           ================================================== */
 
         .rythme .ouvrir {
-            background: var(--bleu);
-        }
 
-        .rythme:hover .ouvrir,
-        .rythme:focus-visible .ouvrir {
-            background: var(--bleu-hover);
+            background:
+                var(--bleu);
         }
 
 
-        /* ==================================================
-           COULEUR INTERVALLES
-           ================================================== */
+        .rythme:hover .ouvrir {
+
+            background:
+                var(--bleu-hover);
+        }
+
 
         .intervalles .ouvrir {
-            background: var(--vert);
-        }
 
-        .intervalles:hover .ouvrir,
-        .intervalles:focus-visible .ouvrir {
-            background: var(--vert-hover);
+            background:
+                var(--vert);
         }
 
 
-        /* ==================================================
-           MODULES FUTURS
-           ================================================== */
+        .intervalles:hover .ouvrir {
+
+            background:
+                var(--vert-hover);
+        }
+
+
+        /* ==============================================
+           FUTURS JEUX
+           ============================================== */
 
         .futurs {
-            margin-top: 46px;
+
+            margin-top: 48px;
         }
+
 
         .futurs h3 {
-            margin-bottom: 16px;
 
             font-size: 14px;
+
             letter-spacing: 1px;
 
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
+
         .futurs-liste {
+
             display: flex;
 
-            justify-content: center;
+            justify-content:
+                center;
+
             flex-wrap: wrap;
 
             gap: 10px;
         }
 
+
         .futur {
+
             padding:
                 10px
-                17px;
+                18px;
 
-            border-radius: 22px;
+            border-radius: 20px;
 
-            background: var(--indisponible);
+            background:
+                #b9bdc1;
 
-            color: #565b60;
+            color:
+                #565b60;
 
             font-size: 13px;
+
             font-weight: bold;
         }
 
 
-        /* ==================================================
-           PIED DE PAGE
-           ================================================== */
+        /* ==============================================
+           FOOTER
+           ============================================== */
 
         footer {
+
             max-width: 800px;
 
             margin:
@@ -361,52 +370,44 @@
                 auto
                 0;
 
-            padding-top: 19px;
+            padding-top: 20px;
 
             border-top:
                 1px solid
-                rgba(17, 17, 17, 0.18);
+                rgba(0, 0, 0, 0.15);
 
             font-size: 12px;
-            line-height: 1.5;
 
-            color: var(--texte-secondaire);
+            color:
+                var(--texte-secondaire);
         }
 
 
-        /* ==================================================
+        /* ==============================================
            MOBILE
-           ================================================== */
+           ============================================== */
 
         @media (max-width: 650px) {
 
             .page {
+
                 padding:
                     35px
-                    12px
-                    28px;
+                    12px;
             }
 
-            .introduction {
-                margin-bottom: 30px;
-            }
 
             .jeux {
-                grid-template-columns: 1fr;
-                gap: 16px;
+
+                grid-template-columns:
+                    1fr;
             }
+
 
             .carte {
-                min-height: 245px;
-                padding: 24px;
-            }
 
-            .icone {
-                font-size: 42px;
-            }
-
-            .carte h2 {
-                font-size: 24px;
+                min-height:
+                    240px;
             }
 
         }
@@ -418,27 +419,31 @@
 
 <body>
 
+
     <main class="page">
 
-        <!-- ================================================
+
+        <!-- ============================================
              EN-TÊTE
-             ================================================ -->
+             ============================================ -->
 
         <header>
 
-            <h1 class="logo">
+            <h1>
                 The<span>Labo</span>
             </h1>
+
 
             <div class="sous-titre">
                 Laboratoire musical
             </div>
 
+
             <p class="introduction">
 
                 Des jeux pour entraîner
-                l’écoute, le rythme
-                et la compréhension musicale.
+                l'écoute, le rythme et
+                la compréhension musicale.
 
                 <br>
 
@@ -449,16 +454,14 @@
         </header>
 
 
-        <!-- ================================================
-             JEUX
-             ================================================ -->
+        <!-- ============================================
+             JEUX DISPONIBLES
+             ============================================ -->
 
-        <section aria-labelledby="titre-jeux">
+        <section>
 
-            <div
-                id="titre-jeux"
-                class="titre-section"
-            >
+
+            <div class="titre-section">
                 CHOISIS TON ATELIER
             </div>
 
@@ -466,9 +469,9 @@
             <div class="jeux">
 
 
-                <!-- ========================================
+                <!-- ====================================
                      RYTHME
-                     ======================================== -->
+                     ==================================== -->
 
                 ./rythme/
 
@@ -481,9 +484,11 @@
                             ♩ ♪
                         </div>
 
+
                         <h2>
                             Rythme
                         </h2>
+
 
                         <p>
 
@@ -500,6 +505,7 @@
 
                     </div>
 
+
                     <span class="ouvrir">
                         COMMENCER →
                     </span>
@@ -507,9 +513,9 @@
                 </a>
 
 
-                <!-- ========================================
+                <!-- ====================================
                      INTERVALLES
-                     ======================================== -->
+                     ==================================== -->
 
                 ./intervalles/
 
@@ -522,15 +528,17 @@
                             ♪ ↗ ♪
                         </div>
 
+
                         <h2>
                             Intervalles
                         </h2>
+
 
                         <p>
 
                             Écoute deux notes
                             et reconnais
-                            l’intervalle.
+                            l'intervalle.
 
                             <br><br>
 
@@ -542,6 +550,7 @@
                         </p>
 
                     </div>
+
 
                     <span class="ouvrir">
                         COMMENCER →
@@ -555,18 +564,16 @@
         </section>
 
 
-        <!-- ================================================
-             MODULES À VENIR
-             ================================================ -->
+        <!-- ============================================
+             PROCHAINS ATELIERS
+             ============================================ -->
 
-        <section
-            class="futurs"
-            aria-labelledby="titre-futurs"
-        >
+        <section class="futurs">
 
-            <h3 id="titre-futurs">
+            <h3>
                 PROCHAINS ATELIERS
             </h3>
+
 
             <div class="futurs-liste">
 
@@ -574,9 +581,11 @@
                     ♫ Accords
                 </span>
 
+
                 <span class="futur">
                     ♬ Gammes
                 </span>
+
 
                 <span class="futur">
                     ♯ Harmonie
@@ -587,9 +596,9 @@
         </section>
 
 
-        <!-- ================================================
+        <!-- ============================================
              PIED DE PAGE
-             ================================================ -->
+             ============================================ -->
 
         <footer>
 
@@ -600,11 +609,13 @@
             <br>
 
             Laboratoire numérique
-            d’entraînement musical
+            d'entraînement musical
 
         </footer>
 
+
     </main>
+
 
 </body>
 
