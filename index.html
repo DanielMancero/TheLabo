@@ -1,709 +1,2446 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta charset="utf-8">
 
-    <meta
-        name="description"
-        content="TheLabo - Laboratoire numérique d'entraînement musical"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
 
-    <title>TheLabo · Laboratoire musical</title>
+<title>TheLabo - Jeux musicaux</title>
 
-    <style>
+<style>
 
-        /* ==================================================
-           BASE
-           ================================================== */
+:root {
+    --bg: #a8aeb4;
+    --card: #c9cdd1;
+    --ink: #151719;
+    --muted: #454b50;
+    --blue: #82b5d2;
+    --green: #88b595;
+    --red: #d49b9b;
+    --line: #727a80;
+}
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        :root {
-            --fond: #a8aeb4;
-            --carte: #c5cacf;
+body {
+    margin: 0;
 
-            --bleu: #8fb6cc;
-            --bleu-hover: #729eb8;
+    background: var(--bg);
+    color: var(--ink);
 
-            --vert: #91b89d;
-            --vert-hover: #749b80;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
 
-            --texte: #111111;
-            --texte-secondaire: #41474c;
 
-            --bordure: #737b82;
-            --indisponible: #b9bdc1;
-        }
+/* =========================================================
+   ÉCRANS
+   ========================================================= */
 
-        html {
-            scroll-behavior: smooth;
-        }
+.screen {
+    display: none;
 
-        body {
-            margin: 0;
+    min-height: 100vh;
 
-            min-height: 100vh;
+    padding: 28px 16px;
+}
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+.screen.active {
+    display: block;
+}
 
-            background: var(--fond);
+.wrap {
+    max-width: 900px;
 
-            color: var(--texte);
-        }
+    margin: auto;
 
+    text-align: center;
+}
 
-        /* ==================================================
-           PAGE
-           ================================================== */
 
-        .page {
-            width: min(1000px, 94%);
+/* =========================================================
+   TYPOGRAPHIE
+   ========================================================= */
 
-            margin: 0 auto;
+h1 {
+    margin: 10px 0;
 
-            padding:
-                55px
-                20px
-                40px;
+    font-size:
+        clamp(
+            30px,
+            6vw,
+            58px
+        );
+}
 
-            text-align: center;
-        }
+h2 {
+    margin: 14px 0;
+}
 
+.subtitle {
+    color: var(--muted);
 
-        /* ==================================================
-           EN-TÊTE
-           ================================================== */
+    margin-bottom: 30px;
+}
 
-        .logo {
-            margin: 0;
 
-            font-size:
-                clamp(
-                    44px,
-                    8vw,
-                    76px
-                );
+/* =========================================================
+   ACCUEIL
+   ========================================================= */
 
-            font-weight: 800;
+.grid {
+    display: grid;
 
-            letter-spacing: -2px;
-        }
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
 
-        .logo span {
-            color: #245b36;
-        }
+    gap: 18px;
+}
 
-        .sous-titre {
-            margin:
-                5px
-                0
-                14px;
+.card {
+    background: var(--card);
 
-            font-size: 20px;
+    border:
+        2px solid
+        var(--line);
 
-            font-weight: bold;
+    border-radius: 14px;
 
-            color:
-                var(--texte-secondaire);
-        }
+    padding: 25px;
 
-        .introduction {
-            max-width: 620px;
+    min-height: 230px;
 
-            margin:
-                0
-                auto
-                42px;
+    display: flex;
 
-            font-size: 16px;
+    flex-direction: column;
 
-            line-height: 1.55;
+    justify-content: space-between;
+}
 
-            color:
-                var(--texte-secondaire);
-        }
+.icon {
+    font-size: 46px;
+}
 
 
-        /* ==================================================
-           SECTION
-           ================================================== */
+/* =========================================================
+   BOUTONS
+   ========================================================= */
 
-        .titre-section {
-            margin-bottom: 22px;
+.btn {
+    border: 0;
 
-            font-size: 17px;
+    border-radius: 9px;
 
-            font-weight: bold;
+    padding: 14px 18px;
 
-            letter-spacing: 0.5px;
+    font: inherit;
 
-            color:
-                var(--texte-secondaire);
-        }
+    font-weight: 700;
 
+    cursor: pointer;
 
-        /* ==================================================
-           GRILLE DES JEUX
-           ================================================== */
+    color: var(--ink);
 
-        .jeux {
-            display: grid;
+    background: #d6dade;
+}
 
-            grid-template-columns:
-                repeat(
-                    2,
-                    minmax(0, 1fr)
-                );
+.btn:hover {
+    filter: brightness(0.94);
+}
 
-            gap: 22px;
+.btn:active {
+    transform: scale(0.98);
+}
 
-            max-width: 800px;
+.btn:focus-visible {
+    outline:
+        4px solid
+        white;
 
-            margin: 0 auto;
-        }
+    outline-offset: 3px;
+}
 
+.btn-blue {
+    background: var(--blue);
+}
 
-        /* ==================================================
-           CARTES
-           ================================================== */
+.btn-green {
+    background: var(--green);
+}
 
-        .carte {
-            display: flex;
+.btn-back {
+    background: #c9cdd1;
 
-            flex-direction: column;
+    margin: 8px;
+}
 
-            justify-content: space-between;
 
-            min-height: 300px;
+/* =========================================================
+   OPTIONS ET RÉPONSES
+   ========================================================= */
 
-            padding: 30px;
+.options {
+    display: grid;
 
-            background: var(--carte);
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
 
-            border:
-                2px solid
-                var(--bordure);
+    gap: 10px;
 
-            border-radius: 15px;
+    max-width: 680px;
 
-            color: var(--texte);
+    margin: 18px auto;
+}
 
-            transition:
-                transform 0.16s ease,
-                box-shadow 0.16s ease;
-        }
+.answer {
+    border:
+        2px solid
+        var(--line);
+}
 
-        .carte:hover {
-            transform:
-                translateY(-5px);
+.correct {
+    background:
+        var(--green) !important;
+}
 
-            box-shadow:
-                0
-                12px
-                28px
-                rgba(0, 0, 0, 0.16);
-        }
+.wrong {
+    background:
+        var(--red) !important;
+}
 
 
-        /* ==================================================
-           CONTENU DES CARTES
-           ================================================== */
+/* =========================================================
+   JEU
+   ========================================================= */
 
-        .icone {
-            min-height: 58px;
+.status {
+    min-height: 32px;
 
-            margin-bottom: 12px;
+    font-size: 19px;
 
-            font-size: 48px;
+    font-weight: bold;
 
-            line-height: 1.1;
-        }
+    margin: 12px;
+}
 
-        .carte h2 {
-            margin:
-                8px
-                0
-                12px;
+.toolbar {
+    display: flex;
 
-            font-size: 27px;
-        }
+    justify-content: center;
 
-        .carte p {
-            margin:
-                0
-                0
-                25px;
+    align-items: center;
 
-            font-size: 15px;
+    gap: 10px;
 
-            line-height: 1.5;
+    flex-wrap: wrap;
 
-            color:
-                var(--texte-secondaire);
-        }
+    margin: 12px;
+}
 
+.volume {
+    width:
+        min(
+            260px,
+            55vw
+        );
+}
 
-        /* ==================================================
-           VRAIS BOUTONS
-           ================================================== */
+.score {
+    font-weight: bold;
 
-        .ouvrir {
-            display: block;
+    margin: 14px;
+}
 
-            width: 100%;
+.feedback {
+    min-height: 55px;
 
-            padding:
-                15px
-                18px;
+    line-height: 1.5;
 
-            border: none;
+    margin: 12px;
+}
 
-            border-radius: 8px;
+.hidden {
+    display: none !important;
+}
 
-            color: #111111;
+.perfect {
+    color: #385d30;
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+    font-weight: 800;
+}
 
-            font-size: 15px;
 
-            font-weight: bold;
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-            cursor: pointer;
+@media (max-width: 650px) {
 
-            transition:
-                background-color 0.15s ease,
-                transform 0.1s ease,
-                box-shadow 0.15s ease;
-        }
+    .grid,
+    .options {
+        grid-template-columns: 1fr;
+    }
 
-        .ouvrir:hover {
-            box-shadow:
-                0
-                4px
-                10px
-                rgba(0, 0, 0, 0.12);
-        }
+    .card {
+        min-height: 205px;
+    }
 
-        .ouvrir:active {
-            transform:
-                scale(0.98);
-        }
+    .screen {
+        padding:
+            20px
+            12px;
+    }
+}
 
-        .ouvrir:focus-visible {
-            outline:
-                4px solid
-                #ffffff;
+</style>
 
-            outline-offset:
-                3px;
-        }
-
-
-        /* ==================================================
-           BOUTON RYTHME
-           ================================================== */
-
-        .rythme .ouvrir {
-            background:
-                var(--bleu);
-        }
-
-        .rythme .ouvrir:hover {
-            background:
-                var(--bleu-hover);
-        }
-
-
-        /* ==================================================
-           BOUTON INTERVALLES
-           ================================================== */
-
-        .intervalles .ouvrir {
-            background:
-                var(--vert);
-        }
-
-        .intervalles .ouvrir:hover {
-            background:
-                var(--vert-hover);
-        }
-
-
-        /* ==================================================
-           FUTURS ATELIERS
-           ================================================== */
-
-        .futurs {
-            margin-top: 46px;
-        }
-
-        .futurs h3 {
-            margin-bottom: 16px;
-
-            font-size: 14px;
-
-            letter-spacing: 1px;
-
-            color:
-                var(--texte-secondaire);
-        }
-
-        .futurs-liste {
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 10px;
-        }
-
-        .futur {
-            padding:
-                10px
-                17px;
-
-            border-radius: 22px;
-
-            background:
-                var(--indisponible);
-
-            color: #565b60;
-
-            font-size: 13px;
-
-            font-weight: bold;
-        }
-
-
-        /* ==================================================
-           PIED DE PAGE
-           ================================================== */
-
-        footer {
-            max-width: 800px;
-
-            margin:
-                55px
-                auto
-                0;
-
-            padding-top: 19px;
-
-            border-top:
-                1px solid
-                rgba(
-                    17,
-                    17,
-                    17,
-                    0.18
-                );
-
-            font-size: 12px;
-
-            line-height: 1.5;
-
-            color:
-                var(--texte-secondaire);
-        }
-
-
-        /* ==================================================
-           MOBILE
-           ================================================== */
-
-        @media (max-width: 650px) {
-
-            .page {
-                padding:
-                    35px
-                    12px
-                    28px;
-            }
-
-            .introduction {
-                margin-bottom: 30px;
-            }
-
-            .jeux {
-                grid-template-columns: 1fr;
-
-                gap: 16px;
-            }
-
-            .carte {
-                min-height: 245px;
-
-                padding: 24px;
-            }
-
-            .icone {
-                font-size: 42px;
-            }
-
-            .carte h2 {
-                font-size: 24px;
-            }
-        }
-
-    </style>
 </head>
 
 
 <body>
 
-    <main class="page">
+
+<!-- =======================================================
+     ACCUEIL
+     ======================================================= -->
+
+<section
+    id="home"
+    class="screen active"
+>
+
+<div class="wrap">
+
+    <h1>
+        TheLabo
+    </h1>
+
+    <p class="subtitle">
+        Laboratoire musical
+        <br>
+        Choisis un atelier
+    </p>
 
 
-        <!-- =================================================
-             EN-TÊTE
-             ================================================= -->
-
-        <header>
-
-            <h1 class="logo">
-                The<span>Labo</span>
-            </h1>
+    <div class="grid">
 
 
-            <div class="sous-titre">
-                Laboratoire musical
+        <!-- RYTHME -->
+
+        <div class="card">
+
+            <div>
+
+                <div class="icon">
+                    ♩ ♪
+                </div>
+
+                <h2>
+                    Rythme
+                </h2>
+
+                <p>
+                    Reconnaissance de cellules
+                    rythmiques binaires
+                    et ternaires.
+                </p>
+
             </div>
 
 
-            <p class="introduction">
-
-                Des jeux pour entraîner
-                l'écoute, le rythme
-                et la compréhension musicale.
-
-                <br>
-
-                Choisis un atelier pour commencer.
-
-            </p>
-
-        </header>
-
-
-
-        <!-- =================================================
-             JEUX DISPONIBLES
-             ================================================= -->
-
-        <section aria-labelledby="titre-jeux">
-
-
-            <div
-                id="titre-jeux"
-                class="titre-section"
+            <button
+                id="openRhythm"
+                class="btn btn-blue"
+                type="button"
             >
-                CHOISIS TON ATELIER
+                COMMENCER RYTHME
+            </button>
+
+        </div>
+
+
+        <!-- INTERVALLES -->
+
+        <div class="card">
+
+            <div>
+
+                <div class="icon">
+                    ♪ ↗ ♪
+                </div>
+
+                <h2>
+                    Intervalles
+                </h2>
+
+                <p>
+                    Reconnaissance ascendante,
+                    descendante,
+                    harmonique ou mixte.
+                </p>
+
             </div>
 
 
-            <div class="jeux">
+            <button
+                id="openIntervals"
+                class="btn btn-green"
+                type="button"
+            >
+                COMMENCER INTERVALLES
+            </button>
+
+        </div>
 
 
-                <!-- =========================================
-                     JEU RYTHMIQUE
-                     ========================================= -->
+    </div>
 
-                <div class="carte rythme">
+</div>
 
-                    <div>
-
-                        <div
-                            class="icone"
-                            aria-hidden="true"
-                        >
-                            ♩ ♪
-                        </div>
-
-
-                        <h2>
-                            Rythme
-                        </h2>
-
-
-                        <p>
-
-                            Écoute un rythme
-                            puis retrouve sa représentation.
-
-                            <br><br>
-
-                            Subdivisions binaires
-                            et ternaires.
-
-                        </p>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="ouvrir"
-                        onclick="ouvrirRythme()"
-                    >
-                        COMMENCER →
-                    </button>
-
-                </div>
+</section>
 
 
 
-                <!-- =========================================
-                     JEU D'INTERVALLES
-                     ========================================= -->
+<!-- =======================================================
+     CHOIX RYTHMIQUE
+     ======================================================= -->
 
-                <div class="carte intervalles">
+<section
+    id="rhythmSetup"
+    class="screen"
+>
 
-                    <div>
+<div class="wrap">
 
-                        <div
-                            class="icone"
-                            aria-hidden="true"
-                        >
-                            ♪ ↗ ♪
-                        </div>
+    <h1>
+        Rythme
+    </h1>
 
-
-                        <h2>
-                            Intervalles
-                        </h2>
-
-
-                        <p>
-
-                            Écoute deux notes
-                            et reconnais l'intervalle.
-
-                            <br><br>
-
-                            Ascendant,
-                            descendant,
-                            harmonique
-                            ou mixte.
-
-                        </p>
-
-                    </div>
+    <p>
+        Choisis la famille rythmique.
+    </p>
 
 
-                    <button
-                        type="button"
-                        class="ouvrir"
-                        onclick="ouvrirIntervalles()"
-                    >
-                        COMMENCER →
-                    </button>
+    <div class="options">
 
-                </div>
-
-
-            </div>
-
-        </section>
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="binary"
+            type="button"
+        >
+            BINAIRE - 2/4
+        </button>
 
 
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="ternary"
+            type="button"
+        >
+            TERNAIRE - 6/8
+        </button>
 
-        <!-- =================================================
-             PROCHAINS ATELIERS
-             ================================================= -->
+    </div>
 
-        <section
-            class="futurs"
-            aria-labelledby="titre-futurs"
+
+    <button
+        class="btn btn-back homeBtn"
+        type="button"
+    >
+        RETOUR À L'ACCUEIL
+    </button>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     JEU RYTHMIQUE
+     ======================================================= -->
+
+<section
+    id="rhythmGame"
+    class="screen"
+>
+
+<div class="wrap">
+
+    <h1>
+        Rythme
+    </h1>
+
+
+    <div id="rhythmQuestion">
+    </div>
+
+
+    <div class="toolbar">
+
+        <button
+            id="playRhythm"
+            class="btn btn-blue"
+            type="button"
+        >
+            🔊 ÉCOUTER
+        </button>
+
+
+        <span>
+            Volume
+        </span>
+
+
+        <input
+            id="rhythmVolume"
+            class="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="65"
         >
 
-            <h3 id="titre-futurs">
-                PROCHAINS ATELIERS
-            </h3>
+    </div>
 
 
-            <div class="futurs-liste">
-
-                <span class="futur">
-                    ♫ Accords
-                </span>
-
-
-                <span class="futur">
-                    ♬ Gammes
-                </span>
+    <div
+        id="rhythmPrompt"
+        class="status"
+    >
+        Quel rythme entends-tu ?
+    </div>
 
 
-                <span class="futur">
-                    ♯ Harmonie
-                </span>
-
-            </div>
-
-        </section>
+    <div
+        id="rhythmAnswers"
+        class="options"
+    >
+    </div>
 
 
-
-        <!-- =================================================
-             PIED DE PAGE
-             ================================================= -->
-
-        <footer>
-
-            <strong>
-                TheLabo
-            </strong>
-
-            <br>
-
-            Laboratoire numérique
-            d'entraînement musical
-
-        </footer>
+    <div
+        id="rhythmFeedback"
+        class="feedback"
+    >
+    </div>
 
 
-    </main>
+    <div
+        id="rhythmScore"
+        class="score"
+    >
+    </div>
+
+
+    <button
+        id="rhythmNext"
+        class="btn btn-green hidden"
+        type="button"
+    >
+        QUESTION SUIVANTE
+    </button>
+
+
+    <br>
+
+
+    <button
+        id="rhythmExit"
+        class="btn btn-back"
+        type="button"
+    >
+        CHANGER DE MODE
+    </button>
+
+</div>
+
+</section>
 
 
 
-    <!-- =====================================================
-         NAVIGATION VERS LES JEUX
-         ===================================================== -->
+<!-- =======================================================
+     NIVEAUX D'INTERVALLES
+     ======================================================= -->
 
-    <script>
+<section
+    id="intervalSetup"
+    class="screen"
+>
 
-        function ouvrirRythme() {
+<div class="wrap">
 
-            window.location.href =
-                "./rythme/index.html";
+    <h1>
+        Intervalles
+    </h1>
+
+    <p>
+        Choisis un niveau.
+    </p>
+
+
+    <div class="options">
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="1"
+            type="button"
+        >
+            NIVEAU 1 - REPÈRES
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="2"
+            type="button"
+        >
+            NIVEAU 2 - MAJEUR / MINEUR
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="3"
+            type="button"
+        >
+            NIVEAU 3 - CHROMATIQUE
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="4"
+            type="button"
+        >
+            NIVEAU 4 - EXPERT
+        </button>
+
+    </div>
+
+
+    <button
+        class="btn btn-back homeBtn"
+        type="button"
+    >
+        RETOUR À L'ACCUEIL
+    </button>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     MODE D'INTERVALLES
+     ======================================================= -->
+
+<section
+    id="intervalMode"
+    class="screen"
+>
+
+<div class="wrap">
+
+    <h1>
+        Mode d'écoute
+    </h1>
+
+
+    <div class="options">
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="up"
+            type="button"
+        >
+            ↑ ASCENDANT
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="down"
+            type="button"
+        >
+            ↓ DESCENDANT
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="harmonic"
+            type="button"
+        >
+            ♫ HARMONIQUE
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="mixed"
+            type="button"
+        >
+            ⇅ MIXTE
+        </button>
+
+    </div>
+
+
+    <button
+        id="backLevels"
+        class="btn btn-back"
+        type="button"
+    >
+        RETOUR AUX NIVEAUX
+    </button>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     JEU D'INTERVALLES
+     ======================================================= -->
+
+<section
+    id="intervalGame"
+    class="screen"
+>
+
+<div class="wrap">
+
+    <h1>
+        Intervalles
+    </h1>
+
+
+    <div id="intervalQuestion">
+    </div>
+
+
+    <div class="toolbar">
+
+        <button
+            id="playInterval"
+            class="btn btn-green"
+            type="button"
+        >
+            🔊 ÉCOUTER
+        </button>
+
+
+        <span>
+            Volume
+        </span>
+
+
+        <input
+            id="intervalVolume"
+            class="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="65"
+        >
+
+
+        <span id="volumeLabel">
+            65 %
+        </span>
+
+    </div>
+
+
+    <div
+        id="intervalPrompt"
+        class="status"
+    >
+        Quel intervalle entends-tu ?
+    </div>
+
+
+    <div
+        id="intervalAnswers"
+        class="options"
+    >
+    </div>
+
+
+    <div
+        id="intervalFeedback"
+        class="feedback"
+    >
+    </div>
+
+
+    <div
+        id="intervalScore"
+        class="score"
+    >
+    </div>
+
+
+    <button
+        id="intervalNext"
+        class="btn btn-green hidden"
+        type="button"
+    >
+        QUESTION SUIVANTE
+    </button>
+
+
+    <br>
+
+
+    <button
+        id="intervalExit"
+        class="btn btn-back"
+        type="button"
+    >
+        CHANGER DE MODE
+    </button>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   OUTILS D'INTERFACE
+   ========================================================= */
+
+const $ =
+    id =>
+        document.getElementById(id);
+
+
+const screens =
+    [
+        ...document.querySelectorAll(
+            ".screen"
+        )
+    ];
+
+
+function show(id) {
+
+    screens.forEach(
+        screen => {
+
+            screen.classList.toggle(
+                "active",
+                screen.id === id
+            );
 
         }
+    );
+
+}
 
 
-        function ouvrirIntervalles() {
+/* =========================================================
+   NAVIGATION PRINCIPALE
+   ========================================================= */
 
-            window.location.href =
-                "./intervalles/index.html";
+$("openRhythm").addEventListener(
+    "click",
+    () => show("rhythmSetup")
+);
+
+
+$("openIntervals").addEventListener(
+    "click",
+    () => show("intervalSetup")
+);
+
+
+document
+    .querySelectorAll(".homeBtn")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => show("home")
+            );
 
         }
+    );
 
-    </script>
 
+$("rhythmExit").addEventListener(
+    "click",
+    () => show("rhythmSetup")
+);
+
+
+$("intervalExit").addEventListener(
+    "click",
+    () => show("intervalMode")
+);
+
+
+$("backLevels").addEventListener(
+    "click",
+    () => show("intervalSetup")
+);
+
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+let audioContext = null;
+
+let masterGain = null;
+
+
+function audio() {
+
+    if (!audioContext) {
+
+        audioContext =
+            new (
+                window.AudioContext
+                ||
+                window.webkitAudioContext
+            )();
+
+
+        masterGain =
+            audioContext.createGain();
+
+
+        masterGain.gain.value =
+            0.65;
+
+
+        masterGain.connect(
+            audioContext.destination
+        );
+
+    }
+
+
+    if (
+        audioContext.state ===
+        "suspended"
+    ) {
+
+        audioContext.resume();
+
+    }
+
+
+    return audioContext;
+
+}
+
+
+function setVolume(value) {
+
+    audio();
+
+
+    masterGain.gain.setTargetAtTime(
+        Number(value) / 100,
+        audioContext.currentTime,
+        0.01
+    );
+
+}
+
+
+function tone(
+    frequency,
+    startTime,
+    duration = 0.18,
+    volume = 0.32
+) {
+
+    const context =
+        audio();
+
+
+    const oscillator =
+        context.createOscillator();
+
+
+    const gain =
+        context.createGain();
+
+
+    oscillator.type =
+        "sine";
+
+
+    oscillator.frequency.value =
+        frequency;
+
+
+    gain.gain.setValueAtTime(
+        0.001,
+        startTime
+    );
+
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        startTime + 0.01
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        startTime + duration
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+
+    gain.connect(
+        masterGain
+    );
+
+
+    oscillator.start(
+        startTime
+    );
+
+
+    oscillator.stop(
+        startTime
+        + duration
+        + 0.03
+    );
+
+}
+
+
+/* =========================================================
+   VOLUME
+   ========================================================= */
+
+$("rhythmVolume").addEventListener(
+    "input",
+    event => {
+
+        setVolume(
+            event.target.value
+        );
+
+    }
+);
+
+
+$("intervalVolume").addEventListener(
+    "input",
+    event => {
+
+        setVolume(
+            event.target.value
+        );
+
+
+        $("volumeLabel").textContent =
+            event.target.value
+            + " %";
+
+    }
+);
+
+
+/* =========================================================
+   MÉLANGE
+   ========================================================= */
+
+function shuffle(array) {
+
+    const result =
+        [...array];
+
+
+    for (
+        let i =
+            result.length - 1;
+
+        i > 0;
+
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random()
+                * (i + 1)
+            );
+
+
+        [
+            result[i],
+            result[j]
+
+        ] = [
+
+            result[j],
+            result[i]
+
+        ];
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   JEU RYTHMIQUE
+   ========================================================= */
+
+const rhythmData = {
+
+    binary: [
+
+        {
+            name: "2 croches",
+            pattern: [1, 1],
+            visual: "♪ ♪"
+        },
+
+        {
+            name: "Noire",
+            pattern: [2],
+            visual: "♩"
+        },
+
+        {
+            name: "Croche - deux doubles",
+            pattern: [1, 0.5, 0.5],
+            visual: "♪ ♬"
+        },
+
+        {
+            name: "Deux doubles - croche",
+            pattern: [0.5, 0.5, 1],
+            visual: "♬ ♪"
+        }
+
+    ],
+
+
+    ternary: [
+
+        {
+            name: "3 croches",
+            pattern: [1, 1, 1],
+            visual: "♪ ♪ ♪"
+        },
+
+        {
+            name: "Noire pointée",
+            pattern: [3],
+            visual: "♩."
+        },
+
+        {
+            name: "Noire - croche",
+            pattern: [2, 1],
+            visual: "♩ ♪"
+        },
+
+        {
+            name: "Croche - noire",
+            pattern: [1, 2],
+            visual: "♪ ♩"
+        }
+
+    ]
+
+};
+
+
+let rhythmMeter =
+    "binary";
+
+let rhythmPool =
+    [];
+
+let rhythmIndex =
+    0;
+
+let rhythmScore =
+    0;
+
+let rhythmCurrent =
+    null;
+
+let rhythmLocked =
+    false;
+
+
+document
+    .querySelectorAll(
+        ".rhythm-start"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    startRhythm(
+                        button.dataset.meter
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+function startRhythm(meter) {
+
+    rhythmMeter =
+        meter;
+
+
+    rhythmIndex =
+        0;
+
+
+    rhythmScore =
+        0;
+
+
+    rhythmPool =
+        [];
+
+
+    while (
+        rhythmPool.length < 10
+    ) {
+
+        rhythmPool.push(
+            ...shuffle(
+                rhythmData[meter]
+            )
+        );
+
+    }
+
+
+    rhythmPool =
+        rhythmPool.slice(
+            0,
+            10
+        );
+
+
+    show(
+        "rhythmGame"
+    );
+
+
+    nextRhythm();
+
+}
+
+
+function nextRhythm() {
+
+    if (
+        rhythmIndex >= 10
+    ) {
+
+        finishRhythm();
+
+        return;
+
+    }
+
+
+    rhythmCurrent =
+        rhythmPool[
+            rhythmIndex
+        ];
+
+
+    rhythmIndex++;
+
+
+    rhythmLocked =
+        false;
+
+
+    $("rhythmQuestion").textContent =
+        "Question "
+        + rhythmIndex
+        + " / 10 · "
+        + (
+            rhythmMeter === "binary"
+            ? "2/4"
+            : "6/8"
+        );
+
+
+    $("rhythmPrompt").textContent =
+        "Quel rythme entends-tu ?";
+
+
+    $("rhythmFeedback").textContent =
+        "";
+
+
+    $("rhythmNext")
+        .classList
+        .add(
+            "hidden"
+        );
+
+
+    const answers =
+        $("rhythmAnswers");
+
+
+    answers.innerHTML =
+        "";
+
+
+    rhythmData[
+        rhythmMeter
+    ].forEach(
+        item => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "btn answer";
+
+
+            button.textContent =
+                item.visual
+                + "   "
+                + item.name;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    answerRhythm(
+                        item,
+                        button
+                    );
+
+                }
+            );
+
+
+            answers.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    $("rhythmScore").textContent =
+        "Score : "
+        + rhythmScore
+        + " / "
+        + (rhythmIndex - 1);
+
+}
+
+
+function playRhythm() {
+
+    if (!rhythmCurrent) {
+        return;
+    }
+
+
+    setVolume(
+        $("rhythmVolume").value
+    );
+
+
+    let time =
+        audio().currentTime
+        + 0.05;
+
+
+    const unit =
+        0.26;
+
+
+    rhythmCurrent.pattern
+        .forEach(
+            length => {
+
+                tone(
+                    740,
+                    time,
+                    0.09,
+                    0.28
+                );
+
+
+                time +=
+                    length
+                    * unit;
+
+            }
+        );
+
+}
+
+
+$("playRhythm")
+    .addEventListener(
+        "click",
+        playRhythm
+    );
+
+
+function answerRhythm(
+    item,
+    selectedButton
+) {
+
+    if (rhythmLocked) {
+        return;
+    }
+
+
+    rhythmLocked =
+        true;
+
+
+    document
+        .querySelectorAll(
+            "#rhythmAnswers .answer"
+        )
+        .forEach(
+            button => {
+
+                button.disabled =
+                    true;
+
+
+                if (
+                    button.textContent
+                        .includes(
+                            rhythmCurrent.name
+                        )
+                ) {
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+    if (
+        item.name ===
+        rhythmCurrent.name
+    ) {
+
+        rhythmScore++;
+
+
+        $("rhythmPrompt").textContent =
+            "✓ Bonne réponse !";
+
+
+        $("rhythmFeedback").textContent =
+            rhythmCurrent.visual
+            + " · "
+            + rhythmCurrent.name;
+
+
+        $("rhythmScore").textContent =
+            "Score : "
+            + rhythmScore
+            + " / "
+            + rhythmIndex;
+
+
+        setTimeout(
+            nextRhythm,
+            850
+        );
+
+    }
+
+    else {
+
+        selectedButton
+            .classList
+            .add(
+                "wrong"
+            );
+
+
+        $("rhythmPrompt").textContent =
+            "✗ Réponse incorrecte";
+
+
+        $("rhythmFeedback").textContent =
+            "Bonne réponse : "
+            + rhythmCurrent.visual
+            + " · "
+            + rhythmCurrent.name;
+
+
+        $("rhythmScore").textContent =
+            "Score : "
+            + rhythmScore
+            + " / "
+            + rhythmIndex;
+
+
+        $("rhythmNext")
+            .classList
+            .remove(
+                "hidden"
+            );
+
+    }
+
+}
+
+
+$("rhythmNext")
+    .addEventListener(
+        "click",
+        nextRhythm
+    );
+
+
+function finishRhythm() {
+
+    $("rhythmQuestion").textContent =
+        "Manche terminée";
+
+
+    $("rhythmPrompt").textContent =
+        "Score final : "
+        + rhythmScore
+        + " / 10";
+
+
+    if (
+        rhythmScore === 10
+    ) {
+
+        $("rhythmFeedback").innerHTML =
+            '<span class="perfect">'
+            + '★ BRAVO · MANCHE PARFAITE ! ★'
+            + '</span>';
+
+    }
+
+    else {
+
+        $("rhythmFeedback").textContent =
+            "Recommence pour améliorer ton score.";
+
+    }
+
+
+    $("rhythmAnswers").innerHTML =
+        "";
+
+
+    const next =
+        $("rhythmNext");
+
+
+    next.textContent =
+        "REJOUER";
+
+
+    next.classList.remove(
+        "hidden"
+    );
+
+
+    next.onclick =
+        () => {
+
+            next.onclick =
+                null;
+
+
+            next.textContent =
+                "QUESTION SUIVANTE";
+
+
+            startRhythm(
+                rhythmMeter
+            );
+
+        };
+
+}
+
+
+/* =========================================================
+   JEU D'INTERVALLES
+   ========================================================= */
+
+const intervals = [
+
+    { semitones: 1, name: "2de mineure" },
+
+    { semitones: 2, name: "2de majeure" },
+
+    { semitones: 3, name: "3ce mineure" },
+
+    { semitones: 4, name: "3ce majeure" },
+
+    { semitones: 5, name: "4te juste" },
+
+    { semitones: 6, name: "Triton" },
+
+    { semitones: 7, name: "5te juste" },
+
+    { semitones: 8, name: "6te mineure" },
+
+    { semitones: 9, name: "6te majeure" },
+
+    { semitones: 10, name: "7e mineure" },
+
+    { semitones: 11, name: "7e majeure" },
+
+    { semitones: 12, name: "Octave juste" }
+
+];
+
+
+const levels = {
+
+    1: [
+        2,
+        4,
+        5,
+        7,
+        12
+    ],
+
+    2: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        12
+    ],
+
+    3: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+    ],
+
+    4: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+    ]
+
+};
+
+
+const noteNames = [
+    "Do",
+    "Do♯",
+    "Ré",
+    "Mi♭",
+    "Mi",
+    "Fa",
+    "Fa♯",
+    "Sol",
+    "La♭",
+    "La",
+    "Si♭",
+    "Si"
+];
+
+
+let intervalLevel =
+    1;
+
+let intervalMode =
+    "up";
+
+let intervalPool =
+    [];
+
+let intervalIndex =
+    0;
+
+let intervalScore =
+    0;
+
+let intervalCurrent =
+    null;
+
+let intervalLocked =
+    false;
+
+
+/* =========================================================
+   NIVEAUX
+   ========================================================= */
+
+document
+    .querySelectorAll(
+        ".levelBtn"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    intervalLevel =
+                        Number(
+                            button.dataset.level
+                        );
+
+
+                    show(
+                        "intervalMode"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   MODES
+   ========================================================= */
+
+document
+    .querySelectorAll(
+        ".modeBtn"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    intervalMode =
+                        button.dataset.mode;
+
+
+                    startIntervals();
+
+                }
+            );
+
+        }
+    );
+
+
+function allowedIntervals() {
+
+    return intervals.filter(
+        interval =>
+
+            levels[
+                intervalLevel
+            ].includes(
+                interval.semitones
+            )
+    );
+
+}
+
+
+/* =========================================================
+   DÉMARRER LES INTERVALLES
+   ========================================================= */
+
+function startIntervals() {
+
+    intervalIndex =
+        0;
+
+
+    intervalScore =
+        0;
+
+
+    intervalPool =
+        [];
+
+
+    const allowed =
+        allowedIntervals();
+
+
+    while (
+        intervalPool.length < 10
+    ) {
+
+        intervalPool.push(
+            ...shuffle(
+                allowed
+            )
+        );
+
+    }
+
+
+    intervalPool =
+        intervalPool.slice(
+            0,
+            10
+        );
+
+
+    show(
+        "intervalGame"
+    );
+
+
+    nextInterval();
+
+}
+
+
+/* =========================================================
+   NOUVELLE QUESTION D'INTERVALLE
+   ========================================================= */
+
+function nextInterval() {
+
+    if (
+        intervalIndex >= 10
+    ) {
+
+        finishIntervals();
+
+        return;
+
+    }
+
+
+    const interval =
+        intervalPool[
+            intervalIndex
+        ];
+
+
+    intervalIndex++;
+
+
+    let actualMode =
+        intervalMode;
+
+
+    if (
+        intervalMode ===
+        "mixed"
+    ) {
+
+        const possibilities =
+            [
+                "up",
+                "down",
+                "harmonic"
+            ];
+
+
+        actualMode =
+            possibilities[
+                Math.floor(
+                    Math.random()
+                    * possibilities.length
+                )
+            ];
+
+    }
+
+
+    /*
+        Tessiture :
+        MIDI 57 = La3
+        MIDI 81 = La5
+    */
+
+    const low =
+        57;
+
+    const high =
+        81;
+
+
+    let firstNote;
+
+
+    if (
+        actualMode ===
+        "down"
+    ) {
+
+        firstNote =
+            low
+            + interval.semitones
+            + Math.floor(
+                Math.random()
+                * (
+                    high
+                    - low
+                    - interval.semitones
+                    + 1
+                )
+            );
+
+    }
+
+    else {
+
+        firstNote =
+            low
+            + Math.floor(
+                Math.random()
+                * (
+                    high
+                    - low
+                    - interval.semitones
+                    + 1
+                )
+            );
+
+    }
+
+
+    const secondNote =
+
+        actualMode === "down"
+
+        ? firstNote
+            - interval.semitones
+
+        : firstNote
+            + interval.semitones;
+
+
+    intervalCurrent = {
+
+        interval:
+            interval,
+
+        mode:
+            actualMode,
+
+        first:
+            firstNote,
+
+        second:
+            secondNote
+
+    };
+
+
+    intervalLocked =
+        false;
+
+
+    $("intervalQuestion").textContent =
+        "Question "
+        + intervalIndex
+        + " / 10"
+        + " · Niveau "
+        + intervalLevel;
+
+
+    $("intervalPrompt").textContent =
+        "Quel intervalle entends-tu ?";
+
+
+    $("intervalFeedback").textContent =
+        "";
+
+
+    $("intervalNext")
+        .classList
+        .add(
+            "hidden"
+        );
+
+
+    const answers =
+        $("intervalAnswers");
+
+
+    answers.innerHTML =
+        "";
+
+
+    allowedIntervals()
+        .forEach(
+            item => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.type =
+                    "button";
+
+
+                button.className =
+                    "btn answer";
+
+
+                button.textContent =
+                    item.name;
+
+
+                button.dataset.semitones =
+                    item.semitones;
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        answerInterval(
+                            item,
+                            button
+                        );
+
+                    }
+                );
+
+
+                answers.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+    $("intervalScore").textContent =
+        "Score : "
+        + intervalScore
+        + " / "
+        + (intervalIndex - 1);
+
+}
+
+
+/* =========================================================
+   MIDI VERS HZ
+   ========================================================= */
+
+function midiToHz(midi) {
+
+    return 440
+        * Math.pow(
+            2,
+            (midi - 69) / 12
+        );
+
+}
+
+
+/* =========================================================
+   ÉCOUTER L'INTERVALLE
+   ========================================================= */
+
+function playInterval() {
+
+    if (!intervalCurrent) {
+        return;
+    }
+
+
+    setVolume(
+        $("intervalVolume").value
+    );
+
+
+    const time =
+        audio().currentTime
+        + 0.05;
+
+
+    if (
+        intervalCurrent.mode ===
+        "harmonic"
+    ) {
+
+        tone(
+            midiToHz(
+                intervalCurrent.first
+            ),
+            time,
+            0.70,
+            0.24
+        );
+
+
+        tone(
+            midiToHz(
+                intervalCurrent.second
+            ),
+            time,
+            0.70,
+            0.24
+        );
+
+    }
+
+    else {
+
+        tone(
+            midiToHz(
+                intervalCurrent.first
+            ),
+            time,
+            0.50,
+            0.32
+        );
+
+
+        tone(
+            midiToHz(
+                intervalCurrent.second
+            ),
+            time + 0.62,
+            0.50,
+            0.32
+        );
+
+    }
+
+}
+
+
+$("playInterval")
+    .addEventListener(
+        "click",
+        playInterval
+    );
+
+
+/* =========================================================
+   RÉPONSE INTERVALLE
+   ========================================================= */
+
+function answerInterval(
+    item,
+    selectedButton
+) {
+
+    if (
+        intervalLocked
+    ) {
+        return;
+    }
+
+
+    intervalLocked =
+        true;
+
+
+    document
+        .querySelectorAll(
+            "#intervalAnswers .answer"
+        )
+        .forEach(
+            button => {
+
+                button.disabled =
+                    true;
+
+
+                if (
+                    Number(
+                        button.dataset.semitones
+                    )
+                    ===
+                    intervalCurrent
+                        .interval
+                        .semitones
+                ) {
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+    const firstName =
+        noteNames[
+            intervalCurrent.first
+            % 12
+        ];
+
+
+    const secondName =
+        noteNames[
+            intervalCurrent.second
+            % 12
+        ];
+
+
+    const description =
+
+        firstName
+        + " → "
+        + secondName
+        + " · "
+        + intervalCurrent
+            .interval
+            .name
+        + " · "
+        + intervalCurrent
+            .interval
+            .semitones
+        + " demi-ton"
+        + (
+            intervalCurrent
+                .interval
+                .semitones > 1
+            ? "s"
+            : ""
+        );
+
+
+    if (
+        item.semitones ===
+        intervalCurrent
+            .interval
+            .semitones
+    ) {
+
+        intervalScore++;
+
+
+        $("intervalPrompt").textContent =
+            "✓ Bonne réponse !";
+
+
+        $("intervalFeedback").textContent =
+            description;
+
+
+        $("intervalScore").textContent =
+            "Score : "
+            + intervalScore
+            + " / "
+            + intervalIndex;
+
+
+        setTimeout(
+            nextInterval,
+            900
+        );
+
+    }
+
+    else {
+
+        selectedButton
+            .classList
+            .add(
+                "wrong"
+            );
+
+
+        $("intervalPrompt").textContent =
+            "✗ Réponse incorrecte";
+
+
+        $("intervalFeedback").textContent =
+            "Correction : "
+            + description;
+
+
+        $("intervalScore").textContent =
+            "Score : "
+            + intervalScore
+            + " / "
+            + intervalIndex;
+
+
+        $("intervalNext")
+            .classList
+            .remove(
+                "hidden"
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+   ========================================================= */
+
+$("intervalNext")
+    .addEventListener(
+        "click",
+        nextInterval
+    );
+
+
+/* =========================================================
+   FIN DU JEU D'INTERVALLES
+   ========================================================= */
+
+function finishIntervals() {
+
+    $("intervalQuestion").textContent =
+        "Manche terminée";
+
+
+    $("intervalPrompt").textContent =
+        "Score final : "
+        + intervalScore
+        + " / 10";
+
+
+    if (
+        intervalScore === 10
+    ) {
+
+        $("intervalFeedback").innerHTML =
+            '<span class="perfect">'
+            + '★ BRAVO · MANCHE PARFAITE ! ★'
+            + '</span>';
+
+    }
+
+    else {
+
+        $("intervalFeedback").textContent =
+            "Recommence pour améliorer ton score.";
+
+    }
+
+
+    $("intervalAnswers").innerHTML =
+        "";
+
+
+    const next =
+        $("intervalNext");
+
+
+    next.textContent =
+        "REJOUER";
+
+
+    next.classList.remove(
+        "hidden"
+    );
+
+
+    next.onclick =
+        () => {
+
+            next.onclick =
+                null;
+
+
+            next.textContent =
+                "QUESTION SUIVANTE";
+
+
+            startIntervals();
+
+        };
+
+}
+
+</script>
 
 </body>
-
 </html>
