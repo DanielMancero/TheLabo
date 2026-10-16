@@ -424,38 +424,132 @@
 
 <body>
 
-    <main class="page">
+<main class="page">
+
+    <!-- ============================================
+         EN-TÊTE
+         ============================================ -->
+
+    <header>
+
+        <h1 class="logo">
+            The<span>Labo</span>
+        </h1>
+
+        <div class="sous-titre">
+            Laboratoire musical
+        </div>
+
+        <p class="introduction">
+            Des jeux pour entraîner l'écoute,
+            le rythme et la compréhension musicale.
+
+            <br>
+
+            Choisis un atelier pour commencer.
+        </p>
+
+    </header>
 
 
-        <!-- ============================================
-             EN-TÊTE
-             ============================================ -->
+    <!-- ============================================
+         JEUX DISPONIBLES
+         ============================================ -->
 
-        <header>
+    <section aria-labelledby="titre-jeux">
 
-            <h1 class="logo">
-                The<span>Labo</span>
-            </h1>
-
-
-            <div class="sous-titre">
-                Laboratoire musical
-            </div>
+        <div
+            id="titre-jeux"
+            class="titre-section"
+        >
+            CHOISIS TON ATELIER
+        </div>
 
 
-            <p class="introduction">
+        <div class="jeux">
 
-                Des jeux pour entraîner l'écoute,
-                le rythme et la compréhension musicale.
+            <!-- ====================================
+                 JEU RYTHMIQUE
+                 ==================================== -->
 
-                <br>
+            ./rythme/
 
-                Choisis un atelier pour commencer.
+                <div>
 
-            </p>
+                    <div
+                        class="icone"
+                        aria-hidden="true"
+                    >
+                        ♩ ♪
+                    </div>
 
-        </header>
+                    <h2>
+                        Rythme
+                    </h2>
 
+                    <p>
+                        Écoute un rythme
+                        puis retrouve sa représentation.
+
+                        <br><br>
+
+                        Subdivisions binaires
+                        et ternaires.
+                    </p>
+
+                </div>
+
+                <span class="ouvrir">
+                    COMMENCER →
+                </span>
+
+            </a>
+
+
+            <!-- ====================================
+                 JEU D'INTERVALLES
+                 ==================================== -->
+
+            ./intervalles/
+
+                <div>
+
+                    <div
+                        class="icone"
+                        aria-hidden="true"
+                    >
+                        ♪ ↗ ♪
+                    </div>
+
+                    <h2>
+                        Intervalles
+                    </h2>
+
+                    <p>
+                        Écoute deux notes
+                        et reconnais l'intervalle.
+
+                        <br><br>
+
+                        Ascendant,
+                        descendant,
+                        harmonique
+                        ou mixte.
+                    </p>
+
+                </div>
+
+                <span class="ouvrir">
+                    COMMENCER →
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
 
 
         <!-- ============================================
