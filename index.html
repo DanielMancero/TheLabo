@@ -17,6 +17,11 @@
     <title>TheLabo · Laboratoire musical</title>
 
     <style>
+
+        /* ============================================
+           BASE
+           ============================================ */
+
         * {
             box-sizing: border-box;
         }
@@ -55,8 +60,14 @@
             color: var(--texte);
         }
 
+
+        /* ============================================
+           PAGE
+           ============================================ */
+
         .page {
             width: min(1000px, 94%);
+
             margin: 0 auto;
 
             padding:
@@ -67,9 +78,10 @@
             text-align: center;
         }
 
-        /* ==============================================
+
+        /* ============================================
            EN-TÊTE
-           ============================================== */
+           ============================================ */
 
         .logo {
             margin: 0;
@@ -81,6 +93,7 @@
             );
 
             font-weight: 800;
+
             letter-spacing: -2px;
         }
 
@@ -92,6 +105,7 @@
             margin: 5px 0 14px;
 
             font-size: 20px;
+
             font-weight: bold;
 
             color: var(--texte-secondaire);
@@ -106,19 +120,22 @@
                 42px;
 
             font-size: 16px;
+
             line-height: 1.55;
 
             color: var(--texte-secondaire);
         }
 
-        /* ==============================================
-           SECTION
-           ============================================== */
+
+        /* ============================================
+           SECTION JEUX
+           ============================================ */
 
         .titre-section {
             margin-bottom: 22px;
 
             font-size: 17px;
+
             font-weight: bold;
 
             letter-spacing: 0.5px;
@@ -126,9 +143,6 @@
             color: var(--texte-secondaire);
         }
 
-        /* ==============================================
-           GRILLE DES JEUX
-           ============================================== */
 
         .jeux {
             display: grid;
@@ -142,17 +156,20 @@
             gap: 22px;
 
             max-width: 800px;
+
             margin: 0 auto;
         }
 
-        /* ==============================================
-           CARTES CLIQUABLES
-           ============================================== */
+
+        /* ============================================
+           CARTE CLIQUABLE
+           ============================================ */
 
         .carte {
             display: flex;
 
             flex-direction: column;
+
             justify-content: space-between;
 
             min-height: 300px;
@@ -168,12 +185,14 @@
             border-radius: 15px;
 
             color: var(--texte);
+
             text-decoration: none;
 
             transition:
                 transform 0.16s ease,
                 box-shadow 0.16s ease;
         }
+
 
         .carte:hover {
             transform: translateY(-5px);
@@ -185,18 +204,22 @@
                 rgba(0, 0, 0, 0.16);
         }
 
+
         .carte:active {
             transform: translateY(-2px);
         }
 
+
         .carte:focus-visible {
             outline: 4px solid #ffffff;
+
             outline-offset: 4px;
         }
 
-        /* ==============================================
+
+        /* ============================================
            CONTENU DES CARTES
-           ============================================== */
+           ============================================ */
 
         .icone {
             min-height: 58px;
@@ -204,22 +227,32 @@
             margin-bottom: 12px;
 
             font-size: 48px;
+
             line-height: 1.1;
         }
 
+
         .carte h2 {
             margin: 8px 0 12px;
+
             font-size: 27px;
         }
+
 
         .carte p {
             margin: 0 0 25px;
 
             font-size: 15px;
+
             line-height: 1.5;
 
             color: var(--texte-secondaire);
         }
+
+
+        /* ============================================
+           BOUTON VISUEL
+           ============================================ */
 
         .ouvrir {
             display: block;
@@ -231,61 +264,73 @@
             border-radius: 8px;
 
             font-size: 15px;
+
             font-weight: bold;
 
             transition: background 0.15s ease;
         }
 
-        /* ==============================================
+
+        /* ============================================
            RYTHME
-           ============================================== */
+           ============================================ */
 
         .rythme .ouvrir {
             background: var(--bleu);
         }
+
 
         .rythme:hover .ouvrir,
         .rythme:focus-visible .ouvrir {
             background: var(--bleu-hover);
         }
 
-        /* ==============================================
+
+        /* ============================================
            INTERVALLES
-           ============================================== */
+           ============================================ */
 
         .intervalles .ouvrir {
             background: var(--vert);
         }
+
 
         .intervalles:hover .ouvrir,
         .intervalles:focus-visible .ouvrir {
             background: var(--vert-hover);
         }
 
-        /* ==============================================
+
+        /* ============================================
            PROCHAINS ATELIERS
-           ============================================== */
+           ============================================ */
 
         .futurs {
             margin-top: 46px;
         }
 
+
         .futurs h3 {
             margin-bottom: 16px;
 
             font-size: 14px;
+
             letter-spacing: 1px;
 
             color: var(--texte-secondaire);
         }
 
+
         .futurs-liste {
             display: flex;
+
             justify-content: center;
+
             flex-wrap: wrap;
 
             gap: 10px;
         }
+
 
         .futur {
             padding: 10px 17px;
@@ -293,15 +338,18 @@
             border-radius: 22px;
 
             background: var(--indisponible);
+
             color: #565b60;
 
             font-size: 13px;
+
             font-weight: bold;
         }
 
-        /* ==============================================
+
+        /* ============================================
            PIED DE PAGE
-           ============================================== */
+           ============================================ */
 
         footer {
             max-width: 800px;
@@ -318,14 +366,16 @@
                 rgba(17, 17, 17, 0.18);
 
             font-size: 12px;
+
             line-height: 1.5;
 
             color: var(--texte-secondaire);
         }
 
-        /* ==============================================
-           MOBILE
-           ============================================== */
+
+        /* ============================================
+           VERSION MOBILE
+           ============================================ */
 
         @media (max-width: 650px) {
 
@@ -336,35 +386,46 @@
                     28px;
             }
 
+
             .introduction {
                 margin-bottom: 30px;
             }
 
+
             .jeux {
                 grid-template-columns: 1fr;
+
                 gap: 16px;
             }
 
+
             .carte {
                 min-height: 245px;
+
                 padding: 24px;
             }
+
 
             .icone {
                 font-size: 42px;
             }
 
+
             .carte h2 {
                 font-size: 24px;
             }
+
         }
+
     </style>
+
 </head>
 
 
 <body>
 
     <main class="page">
+
 
         <!-- ============================================
              EN-TÊTE
@@ -376,20 +437,25 @@
                 The<span>Labo</span>
             </h1>
 
+
             <div class="sous-titre">
                 Laboratoire musical
             </div>
 
+
             <p class="introduction">
+
                 Des jeux pour entraîner l'écoute,
                 le rythme et la compréhension musicale.
 
                 <br>
 
                 Choisis un atelier pour commencer.
+
             </p>
 
         </header>
+
 
 
         <!-- ============================================
@@ -410,7 +476,10 @@
 
 
                 <!-- ====================================
-                     RYTHME
+                     JEU RYTHMIQUE
+
+                     Lien vers :
+                     ./rythme/index.html
                      ==================================== -->
 
                 ./rythme/
@@ -424,11 +493,14 @@
                             ♩ ♪
                         </div>
 
+
                         <h2>
                             Rythme
                         </h2>
 
+
                         <p>
+
                             Écoute un rythme
                             puis retrouve sa représentation.
 
@@ -436,9 +508,11 @@
 
                             Subdivisions binaires
                             et ternaires.
+
                         </p>
 
                     </div>
+
 
                     <span class="ouvrir">
                         COMMENCER →
@@ -447,8 +521,12 @@
                 </a>
 
 
+
                 <!-- ====================================
-                     INTERVALLES
+                     JEU D'INTERVALLES
+
+                     Lien vers :
+                     ./intervalles/index.html
                      ==================================== -->
 
                 ./intervalles/
@@ -462,11 +540,14 @@
                             ♪ ↗ ♪
                         </div>
 
+
                         <h2>
                             Intervalles
                         </h2>
 
+
                         <p>
+
                             Écoute deux notes
                             et reconnais l'intervalle.
 
@@ -476,9 +557,11 @@
                             descendant,
                             harmonique
                             ou mixte.
+
                         </p>
 
                     </div>
+
 
                     <span class="ouvrir">
                         COMMENCER →
@@ -492,8 +575,9 @@
         </section>
 
 
+
         <!-- ============================================
-             PROCHAINS ATELIERS
+             FUTURS ATELIERS
              ============================================ -->
 
         <section
@@ -505,15 +589,18 @@
                 PROCHAINS ATELIERS
             </h3>
 
+
             <div class="futurs-liste">
 
                 <span class="futur">
                     ♫ Accords
                 </span>
 
+
                 <span class="futur">
                     ♬ Gammes
                 </span>
+
 
                 <span class="futur">
                     ♯ Harmonie
@@ -522,6 +609,7 @@
             </div>
 
         </section>
+
 
 
         <!-- ============================================
@@ -540,6 +628,7 @@
             d'entraînement musical
 
         </footer>
+
 
     </main>
 
