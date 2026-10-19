@@ -11,48 +11,7 @@
 >
 
 <title>TheLabo - Jeux musicaux</title>
-/* =========================================================
-   RYTHME - NIVEAUX ET CORRECTION
-   ========================================================= */
 
-.rhythm-levels {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-    max-width: 680px;
-    margin: 18px auto;
-}
-
-.rhythm-info {
-    color: var(--muted);
-    margin: 8px 0 18px;
-}
-
-.rhythm-correction {
-    font-size: 22px;
-    line-height: 1.6;
-}
-
-.takadimi {
-    font-weight: 800;
-    color: #334e5d;
-    letter-spacing: 1px;
-}
-
-.tempo-control {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin: 10px;
-}
-
-@media (max-width: 650px) {
-    .rhythm-levels {
-        grid-template-columns: 1fr;
-    }
-}
 <style>
 
 :root {
@@ -462,31 +421,34 @@ h2 {
      ======================================================= -->
 
 <section
-   <section
     id="rhythmSetup"
     class="screen"
 >
 
 <div class="wrap">
 
-    <h1>Rythme</h1>
+    <h1>
+        Rythme
+    </h1>
 
     <p>
-        Choisis d'abord la famille rythmique.
+        Choisis la famille rythmique.
     </p>
+
 
     <div class="options">
 
         <button
-            class="btn btn-blue rhythm-meter"
+            class="btn btn-blue rhythm-start"
             data-meter="binary"
             type="button"
         >
             BINAIRE - 2/4
         </button>
 
+
         <button
-            class="btn btn-blue rhythm-meter"
+            class="btn btn-blue rhythm-start"
             data-meter="ternary"
             type="button"
         >
@@ -495,62 +457,183 @@ h2 {
 
     </div>
 
-    <div
-        id="rhythmLevelChoice"
-        class="hidden"
+
+    <button
+        class="btn btn-back homeBtn"
+        type="button"
     >
+        RETOUR À L'ACCUEIL
+    </button>
 
-        <h2>
-            Choisis un niveau
-        </h2>
+</div>
 
-        <p
-            id="rhythmMeterLabel"
-            class="rhythm-info"
-        ></p>
+</section>
 
-        <div class="rhythm-levels">
 
-            <button
-                class="btn rhythm-level"
-                data-level="1"
-                type="button"
-            >
-                NIVEAU 1<br>
-                Cellules simples
-            </button>
 
-            <button
-                class="btn rhythm-level"
-                data-level="2"
-                type="button"
-            >
-                NIVEAU 2<br>
-                Silences
-            </button>
+<!-- =======================================================
+     JEU RYTHMIQUE
+     ======================================================= -->
 
-            <button
-                class="btn rhythm-level"
-                data-level="3"
-                type="button"
-            >
-                NIVEAU 3<br>
-                Subdivisions
-            </button>
+<section
+    id="rhythmGame"
+    class="screen"
+>
 
-            <button
-                class="btn rhythm-level"
-                data-level="4"
-                type="button"
-            >
-                NIVEAU 4<br>
-                Deux temps
-            </button>
+<div class="wrap">
 
-        </div>
+    <h1>
+        Rythme
+    </h1>
+
+
+    <div id="rhythmQuestion">
+    </div>
+
+
+    <div class="toolbar">
+
+        <button
+            id="playRhythm"
+            class="btn btn-blue"
+            type="button"
+        >
+            🔊 ÉCOUTER
+        </button>
+
+
+        <span>
+            Volume
+        </span>
+
+
+        <input
+            id="rhythmVolume"
+            class="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="65"
+        >
 
     </div>
 
+
+    <div
+        id="rhythmPrompt"
+        class="status"
+    >
+        Quel rythme entends-tu ?
+    </div>
+
+
+    <div
+        id="rhythmAnswers"
+        class="options"
+    >
+    </div>
+
+
+    <div
+        id="rhythmFeedback"
+        class="feedback"
+    >
+    </div>
+
+
+    <div
+        id="rhythmScore"
+        class="score"
+    >
+    </div>
+
+
+    <button
+        id="rhythmNext"
+        class="btn btn-green hidden"
+        type="button"
+    >
+        QUESTION SUIVANTE
+    </button>
+
+
+    <br>
+
+
+    <button
+        id="rhythmExit"
+        class="btn btn-back"
+        type="button"
+    >
+        CHANGER DE MODE
+    </button>
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     NIVEAUX D'INTERVALLES
+     ======================================================= -->
+
+<section
+    id="intervalSetup"
+    class="screen"
+>
+
+<div class="wrap">
+
+    <h1>
+        Intervalles
+    </h1>
+
+    <p>
+        Choisis un niveau.
+    </p>
+
+
+    <div class="options">
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="1"
+            type="button"
+        >
+            NIVEAU 1 - REPÈRES
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="2"
+            type="button"
+        >
+            NIVEAU 2 - MAJEUR / MINEUR
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="3"
+            type="button"
+        >
+            NIVEAU 3 - CHROMATIQUE
+        </button>
+
+
+        <button
+            class="btn btn-green levelBtn"
+            data-level="4"
+            type="button"
+        >
+            NIVEAU 4 - EXPERT
+        </button>
+
+    </div>
+
+
     <button
         class="btn btn-back homeBtn"
         type="button"
@@ -563,11 +646,69 @@ h2 {
 </section>
 
 
+
+<!-- =======================================================
+     MODE D'INTERVALLES
+     ======================================================= -->
+
+<section
+    id="intervalMode"
+    class="screen"
+>
+
+<div class="wrap">
+
+    <h1>
+        Mode d'écoute
+    </h1>
+
+
+    <div class="options">
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="up"
+            type="button"
+        >
+            ↑ ASCENDANT
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="down"
+            type="button"
+        >
+            ↓ DESCENDANT
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="harmonic"
+            type="button"
+        >
+            ♫ HARMONIQUE
+        </button>
+
+
+        <button
+            class="btn btn-green modeBtn"
+            data-mode="mixed"
+            type="button"
+        >
+            ⇅ MIXTE
+        </button>
+
+    </div>
+
+
     <button
-        class="btn btn-back homeBtn"
+        id="backLevels"
+        class="btn btn-back"
         type="button"
     >
-        RETOUR À L'ACCUEIL
+        RETOUR AUX NIVEAUX
     </button>
 
 </div>
@@ -576,1238 +717,118 @@ h2 {
 
 
 
-/* =========================================================
-   JEU RYTHMIQUE
-   ========================================================= */
-
-
-/*
-    Nouvelle représentation :
-
-    pos = position de l'attaque dans l'unité
-    dur = durée
-    rest = silence
-
-    En binaire :
-    1 = noire
-    0.5 = croche
-    0.25 = double croche
-
-    En ternaire :
-    l'unité principale reste ici la noire pointée.
-*/
-
-
-const rhythmData = {
-
-    binary: {
-
-        1: [
-
-            {
-                name: "Noire",
-                visual: "♩",
-                takadimi: "TA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 }
-                ]
-            },
-
-            {
-                name: "Deux croches",
-                visual: "♪ ♪",
-                takadimi: "TA DI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.5 },
-                    { pos: 0.5, dur: 0.5 }
-                ]
-            },
-
-            {
-                name: "Croche - deux doubles",
-                visual: "♪ ♬",
-                takadimi: "TA DI MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.5 },
-                    { pos: 0.5, dur: 0.25 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            },
-
-            {
-                name: "Deux doubles - croche",
-                visual: "♬ ♪",
-                takadimi: "TA KA DI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25 },
-                    { pos: 0.25, dur: 0.25 },
-                    { pos: 0.5, dur: 0.5 }
-                ]
-            },
-
-            {
-                name: "Quatre doubles",
-                visual: "♬ ♬",
-                takadimi: "TA KA DI MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25 },
-                    { pos: 0.25, dur: 0.25 },
-                    { pos: 0.5, dur: 0.25 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            }
-
-        ],
-
-
-        2: [
-
-            {
-                name: "Croche - silence de croche",
-                visual: "♪ 𝄽",
-                takadimi: "TA (DI)",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.5 },
-                    { pos: 0.5, dur: 0.5, rest: true }
-                ]
-            },
-
-            {
-                name: "Silence de croche - croche",
-                visual: "𝄽 ♪",
-                takadimi: "(TA) DI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.5, rest: true },
-                    { pos: 0.5, dur: 0.5 }
-                ]
-            },
-
-            {
-                name: "Double - silence - deux doubles",
-                visual: "♬ 𝄾 ♬",
-                takadimi: "TA (KA) DI MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25 },
-                    { pos: 0.25, dur: 0.25, rest: true },
-                    { pos: 0.5, dur: 0.25 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            },
-
-            {
-                name: "Silence - trois doubles",
-                visual: "𝄾 ♬♪",
-                takadimi: "(TA) KA DI MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25, rest: true },
-                    { pos: 0.25, dur: 0.25 },
-                    { pos: 0.5, dur: 0.25 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            }
-
-        ],
-
-
-        3: [
-
-            {
-                name: "Double - croche - double",
-                visual: "♬♪♬",
-                takadimi: "TA KA-DI MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25 },
-                    { pos: 0.25, dur: 0.5 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            },
-
-            {
-                name: "Croche pointée - double",
-                visual: "♪. ♬",
-                takadimi: "TA — MI",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.75 },
-                    { pos: 0.75, dur: 0.25 }
-                ]
-            },
-
-            {
-                name: "Double - croche pointée",
-                visual: "♬ ♪.",
-                takadimi: "TA KA —",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 0.25 },
-                    { pos: 0.25, dur: 0.75 }
-                ]
-            },
-
-            {
-                name: "Syncope",
-                visual: "♪ ♩ ♪",
-                takadimi: "TA DI — TA",
-                length: 2,
-
-                events: [
-                    { pos: 0, dur: 0.5 },
-                    { pos: 0.5, dur: 1 },
-                    { pos: 1.5, dur: 0.5 }
-                ]
-            }
-
-        ]
-
-    },
-
-
-    ternary: {
-
-        1: [
-
-            {
-                name: "Noire pointée",
-                visual: "♩.",
-                takadimi: "TA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 }
-                ]
-            },
-
-            {
-                name: "Trois croches",
-                visual: "♪ ♪ ♪",
-                takadimi: "TA KI DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 1 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Noire - croche",
-                visual: "♩ ♪",
-                takadimi: "TA — DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 2 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Croche - noire",
-                visual: "♪ ♩",
-                takadimi: "TA KI —",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 2 / 3 }
-                ]
-            }
-
-        ],
-
-
-        2: [
-
-            {
-                name: "Croche - silence - croche",
-                visual: "♪ 𝄽 ♪",
-                takadimi: "TA (KI) DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 1 / 3, rest: true },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Silence - deux croches",
-                visual: "𝄽 ♪ ♪",
-                takadimi: "(TA) KI DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3, rest: true },
-                    { pos: 1 / 3, dur: 1 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Deux croches - silence",
-                visual: "♪ ♪ 𝄽",
-                takadimi: "TA KI (DA)",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 1 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3, rest: true }
-                ]
-            }
-
-        ],
-
-
-        3: [
-
-            {
-                name: "Trois croches",
-                visual: "♪ ♪ ♪",
-                takadimi: "TA KI DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 1 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Noire - croche",
-                visual: "♩ ♪",
-                takadimi: "TA — DA",
-                length: 1,
-
-                events: [
-                    { pos: 0, dur: 2 / 3 },
-                    { pos: 2 / 3, dur: 1 / 3 }
-                ]
-            },
-
-            {
-                name: "Croche - noire",
-                visual: "♪ ♩",
-                takadimi: "TA KI —",
-                length: 1,
+<!-- =======================================================
+     JEU D'INTERVALLES
+     ======================================================= -->
 
-                events: [
-                    { pos: 0, dur: 1 / 3 },
-                    { pos: 1 / 3, dur: 2 / 3 }
-                ]
-            }
+<section
+    id="intervalGame"
+    class="screen"
+>
 
-        ]
+<div class="wrap">
 
-    }
+    <h1>
+        Intervalles
+    </h1>
 
-};
 
+    <div id="intervalQuestion">
+    </div>
 
-/* =========================================================
-   ÉTAT DU JEU
-   ========================================================= */
 
-let rhythmMeter = "binary";
+    <div class="toolbar">
 
-let rhythmLevel = 1;
+        <button
+            id="playInterval"
+            class="btn btn-green"
+            type="button"
+        >
+            🔊 ÉCOUTER
+        </button>
 
-let rhythmPool = [];
 
-let rhythmIndex = 0;
+        <span>
+            Volume
+        </span>
 
-let rhythmScore = 0;
 
-let rhythmCurrent = null;
+        <input
+            id="intervalVolume"
+            class="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="65"
+        >
 
-let rhythmLocked = false;
 
+        <span id="volumeLabel">
+            65 %
+        </span>
 
-/* =========================================================
-   SÉLECTION MESURE
-   ========================================================= */
+    </div>
 
-document
-    .querySelectorAll(".rhythm-meter")
-    .forEach(button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+    <div
+        id="intervalPrompt"
+        class="status"
+    >
+        Quel intervalle entends-tu ?
+    </div>
 
-                rhythmMeter =
-                    button.dataset.meter;
 
+    <div
+        id="intervalAnswers"
+        class="options"
+    >
+    </div>
 
-                $("rhythmMeterLabel").textContent =
-                    rhythmMeter === "binary"
-                    ? "Mesure choisie : 2/4"
-                    : "Mesure choisie : 6/8";
 
+    <div
+        id="intervalFeedback"
+        class="feedback"
+    >
+    </div>
 
-                $("rhythmLevelChoice")
-                    .classList
-                    .remove("hidden");
 
-            }
-        );
+    <div
+        id="intervalScore"
+        class="score"
+    >
+    </div>
 
-    });
 
+    <button
+        id="intervalNext"
+        class="btn btn-green hidden"
+        type="button"
+    >
+        QUESTION SUIVANTE
+    </button>
 
-/* =========================================================
-   SÉLECTION NIVEAU
-   ========================================================= */
 
-document
-    .querySelectorAll(".rhythm-level")
-    .forEach(button => {
+    <br>
 
-        button.addEventListener(
-            "click",
-            () => {
 
-                rhythmLevel =
-                    Number(
-                        button.dataset.level
-                    );
+    <button
+        id="intervalExit"
+        class="btn btn-back"
+        type="button"
+    >
+        CHANGER DE MODE
+    </button>
 
+</div>
 
-                startRhythm();
+</section>
 
-            }
-        );
 
-    });
 
+<script>
 
-/* =========================================================
-   CELLULES DISPONIBLES
-   ========================================================= */
+"use strict";
 
-function getRhythmCells() {
-
-    const meterData =
-        rhythmData[rhythmMeter];
-
-
-    let cells = [];
-
-
-    for (
-        let level = 1;
-        level <= Math.min(rhythmLevel, 3);
-        level++
-    ) {
-
-        cells.push(
-            ...meterData[level]
-        );
-
-    }
-
-
-    return cells;
-
-}
-
-
-/* =========================================================
-   CONSTRUCTION DE DEUX TEMPS
-   ========================================================= */
-
-function makeTwoBeatCell() {
-
-    const source =
-        rhythmData[rhythmMeter][1];
-
-
-    const first =
-        source[
-            Math.floor(
-                Math.random()
-                * source.length
-            )
-        ];
-
-
-    const second =
-        source[
-            Math.floor(
-                Math.random()
-                * source.length
-            )
-        ];
-
-
-    const events = [];
-
-
-    first.events.forEach(
-        event => {
-
-            events.push({
-                ...event
-            });
-
-        }
-    );
-
-
-    second.events.forEach(
-        event => {
-
-            events.push({
-
-                ...event,
-
-                pos:
-                    event.pos
-                    + 1
-
-            });
-
-        }
-    );
-
-
-    return {
-
-        name:
-            first.name
-            + " | "
-            + second.name,
-
-        visual:
-            first.visual
-            + " | "
-            + second.visual,
-
-        takadimi:
-            first.takadimi
-            + " | "
-            + second.takadimi,
-
-        length: 2,
-
-        events:
-            events
-
-    };
-
-}
-
-
-/* =========================================================
-   DÉMARRAGE
-   ========================================================= */
-
-function startRhythm() {
-
-    rhythmIndex = 0;
-
-    rhythmScore = 0;
-
-    rhythmPool = [];
-
-
-    if (
-        rhythmLevel === 4
-    ) {
-
-        while (
-            rhythmPool.length < 10
-        ) {
-
-            rhythmPool.push(
-                makeTwoBeatCell()
-            );
-
-        }
-
-    }
-
-    else {
-
-        const cells =
-            getRhythmCells();
-
-
-        while (
-            rhythmPool.length < 10
-        ) {
-
-            rhythmPool.push(
-                ...shuffle(cells)
-            );
-
-        }
-
-
-        rhythmPool =
-            rhythmPool.slice(0, 10);
-
-    }
-
-
-    show("rhythmGame");
-
-    nextRhythm();
-
-}
-
-
-/* =========================================================
-   QUESTION SUIVANTE
-   ========================================================= */
-
-function nextRhythm() {
-
-    if (
-        rhythmIndex >= 10
-    ) {
-
-        finishRhythm();
-
-        return;
-
-    }
-
-
-    rhythmCurrent =
-        rhythmPool[rhythmIndex];
-
-
-    rhythmIndex++;
-
-
-    rhythmLocked =
-        false;
-
-
-    $("rhythmQuestion").textContent =
-
-        "Question "
-        + rhythmIndex
-        + " / 10 · "
-        + (
-            rhythmMeter === "binary"
-            ? "2/4"
-            : "6/8"
-        )
-        + " · Niveau "
-        + rhythmLevel;
-
-
-    $("rhythmPrompt").textContent =
-        "Quel rythme entends-tu ?";
-
-
-    $("rhythmFeedback").innerHTML =
-        "";
-
-
-    const next =
-        $("rhythmNext");
-
-
-    next.textContent =
-        "QUESTION SUIVANTE";
-
-
-    next.classList.add(
-        "hidden"
-    );
-
-
-    /*
-        Important :
-        on retire un éventuel onclick
-        installé à la fin de la manche.
-    */
-
-    next.onclick =
-        null;
-
-
-    const answers =
-        $("rhythmAnswers");
-
-
-    answers.innerHTML =
-        "";
-
-
-    let choices;
-
-
-    if (
-        rhythmLevel === 4
-    ) {
-
-        choices = [
-            rhythmCurrent
-        ];
-
-
-        while (
-            choices.length < 4
-        ) {
-
-            const candidate =
-                makeTwoBeatCell();
-
-
-            const duplicate =
-                choices.some(
-                    item =>
-                        item.name ===
-                        candidate.name
-                );
-
-
-            if (!duplicate) {
-
-                choices.push(
-                    candidate
-                );
-
-            }
-
-        }
-
-
-        choices =
-            shuffle(choices);
-
-    }
-
-    else {
-
-        choices =
-            shuffle(
-                getRhythmCells()
-            );
-
-
-        /*
-            Maximum 6 choix afin de ne pas
-            surcharger l'écran.
-        */
-
-        if (
-            choices.length > 6
-        ) {
-
-            const others =
-                choices.filter(
-                    item =>
-                        item.name !==
-                        rhythmCurrent.name
-                );
-
-
-            choices = [
-                rhythmCurrent,
-                ...others.slice(0, 5)
-            ];
-
-
-            choices =
-                shuffle(choices);
-
-        }
-
-    }
-
-
-    choices.forEach(
-        item => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type =
-                "button";
-
-
-            button.className =
-                "btn answer";
-
-
-            button.textContent =
-                item.visual
-                + "   "
-                + item.name;
-
-
-            button.dataset.answer =
-                item.name;
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    answerRhythm(
-                        item,
-                        button
-                    );
-
-                }
-            );
-
-
-            answers.appendChild(
-                button
-            );
-
-        }
-    );
-
-
-    $("rhythmScore").textContent =
-        "Score : "
-        + rhythmScore
-        + " / "
-        + (rhythmIndex - 1);
-
-}
-
-
-/* =========================================================
-   TEMPO
-   ========================================================= */
-
-$("rhythmTempo")
-    .addEventListener(
-        "input",
-        event => {
-
-            $("rhythmTempoLabel").textContent =
-                event.target.value
-                + " BPM";
-
-        }
-    );
-
-
-/* =========================================================
-   CLIC / PULSATION
-   ========================================================= */
-
-function rhythmClick(
-    startTime,
-    accented = false
-) {
-
-    tone(
-        accented
-            ? 880
-            : 540,
-
-        startTime,
-
-        0.055,
-
-        accented
-            ? 0.18
-            : 0.11
-    );
-
-}
-
-
-/* =========================================================
-   LECTURE DU RYTHME
-   ========================================================= */
-
-function playRhythm() {
-
-    if (!rhythmCurrent) {
-        return;
-    }
-
-
-    setVolume(
-        $("rhythmVolume").value
-    );
-
-
-    const context =
-        audio();
-
-
-    const bpm =
-        Number(
-            $("rhythmTempo").value
-        );
-
-
-    /*
-        Durée d'une pulsation principale.
-    */
-
-    const beat =
-        60 / bpm;
-
-
-    let start =
-        context.currentTime
-        + 0.08;
-
-
-    /*
-        4 pulsations préparatoires.
-    */
-
-    for (
-        let i = 0;
-        i < 4;
-        i++
-    ) {
-
-        rhythmClick(
-            start + i * beat,
-            i === 0
-        );
-
-    }
-
-
-    /*
-        Le rythme commence après
-        les quatre pulsations.
-    */
-
-    const rhythmStart =
-        start + 4 * beat;
-
-
-    rhythmCurrent.events
-        .forEach(
-            event => {
-
-                /*
-                    Un silence occupe sa position
-                    mais ne produit aucune attaque.
-                */
-
-                if (
-                    event.rest
-                ) {
-                    return;
-                }
-
-
-                tone(
-                    740,
-
-                    rhythmStart
-                    + event.pos * beat,
-
-                    Math.min(
-                        0.11,
-                        event.dur
-                        * beat
-                        * 0.65
-                    ),
-
-                    0.28
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   BOUTON ÉCOUTER
-   ========================================================= */
-
-$("playRhythm")
-    .addEventListener(
-        "click",
-        playRhythm
-    );
-
-
-/* =========================================================
-   RÉPONSE
-   ========================================================= */
-
-function answerRhythm(
-    item,
-    selectedButton
-) {
-
-    if (
-        rhythmLocked
-    ) {
-        return;
-    }
-
-
-    rhythmLocked =
-        true;
-
-
-    document
-        .querySelectorAll(
-            "#rhythmAnswers .answer"
-        )
-        .forEach(
-            button => {
-
-                button.disabled =
-                    true;
-
-
-                if (
-                    button.dataset.answer ===
-                    rhythmCurrent.name
-                ) {
-
-                    button.classList.add(
-                        "correct"
-                    );
-
-                }
-
-            }
-        );
-
-
-    const correct =
-        item.name ===
-        rhythmCurrent.name;
-
-
-    if (
-        correct
-    ) {
-
-        rhythmScore++;
-
-
-        $("rhythmPrompt").textContent =
-            "✓ Bonne réponse !";
-
-    }
-
-    else {
-
-        selectedButton
-            .classList
-            .add(
-                "wrong"
-            );
-
-
-        $("rhythmPrompt").textContent =
-            "✗ Réponse incorrecte";
-
-    }
-
-
-    /*
-        Correction pédagogique :
-        notation + nom + Takadimi.
-    */
-
-    $("rhythmFeedback").innerHTML =
-
-        '<div class="rhythm-correction">'
-        +
-        (
-            correct
-            ? ""
-            : "<strong>Bonne réponse :</strong><br>"
-        )
-        +
-        rhythmCurrent.visual
-        + "<br>"
-        +
-        rhythmCurrent.name
-        + "<br>"
-        +
-        '<span class="takadimi">'
-        +
-        rhythmCurrent.takadimi
-        +
-        "</span>"
-        +
-        "</div>";
-
-
-    $("rhythmScore").textContent =
-        "Score : "
-        + rhythmScore
-        + " / "
-        + rhythmIndex;
-
-
-    /*
-        Il n'y a plus de passage
-        automatique.
-
-        L'élève peut réécouter
-        avant de continuer.
-    */
-
-    $("rhythmNext")
-        .classList
-        .remove(
-            "hidden"
-        );
-
-}
-
-
-/* =========================================================
-   QUESTION SUIVANTE
-   ========================================================= */
-
-$("rhythmNext")
-    .addEventListener(
-        "click",
-        () => {
-
-            /*
-                Si onclick est utilisé par
-                l'écran final, on laisse
-                celui-ci agir.
-            */
-
-            if (
-                $("rhythmNext").onclick
-            ) {
-                return;
-            }
-
-
-            nextRhythm();
-
-        }
-    );
-
-
-/* =========================================================
-   FIN DE LA MANCHE
-   ========================================================= */
-
-function finishRhythm() {
-
-    rhythmCurrent =
-        null;
-
-
-    $("rhythmQuestion").textContent =
-        "Manche terminée";
-
-
-    $("rhythmPrompt").textContent =
-        "Score final : "
-        + rhythmScore
-        + " / 10";
-
-
-    if (
-        rhythmScore === 10
-    ) {
-
-        $("rhythmFeedback").innerHTML =
-            '<span class="perfect">'
-            + '★ BRAVO · MANCHE PARFAITE ! ★'
-            + '</span>';
-
-    }
-
-    else if (
-        rhythmScore >= 8
-    ) {
-
-        $("rhythmFeedback").textContent =
-            "Très bien ! Encore un effort pour atteindre la manche parfaite.";
-
-    }
-
-    else {
-
-        $("rhythmFeedback").textContent =
-            "Recommence pour améliorer ton score.";
-
-    }
-
-
-    $("rhythmAnswers").innerHTML =
-        "";
-
-
-    $("rhythmScore").textContent =
-        "Score : "
-        + rhythmScore
-        + " / 10";
-
-
-    const next =
-        $("rhythmNext");
-
-
-    next.textContent =
-        "REJOUER";
-
-
-    next.classList.remove(
-        "hidden"
-    );
-
-
-    next.onclick =
-        () => {
-
-            next.onclick =
-                null;
-
-
-            next.textContent =
-                "QUESTION SUIVANTE";
-
-
-            startRhythm();
-
-        };
-
-}
 
 /* =========================================================
    OUTILS D'INTERFACE
