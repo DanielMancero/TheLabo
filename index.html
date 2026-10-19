@@ -3021,155 +3021,229 @@ $("playInterval")
    REPONSE INTERVALLE
    ========================================================= */
 
-function answerInterval(
-    item,
-    selectedButton
-) {
+   /* =========================================================
+      REPONSE INTERVALLE
+      ========================================================= */
 
-    if (
-        intervalLocked
-        ||
-        !intervalCurrent
-    ) {
+   function answerInterval(
+       item,
+       selectedButton
+   ) {
 
-        return;
+       if (
+           intervalLocked
+           ||
+           !intervalCurrent
+       ) {
 
-    }
+           return;
 
-
-    intervalLocked =
-        true;
-
-
-    document
-        .querySelectorAll(
-            "#intervalAnswers .answer"
-        )
-        .forEach(
-            button => {
-
-                button.disabled =
-                    true;
+       }
 
 
-                if (
-                    Number(
-                        button.dataset.semitones
-                    )
-                    ===
-                    intervalCurrent
-                        .interval
-                        .semitones
-                ) {
-
-                    button.classList.add(
-                        "correct"
-                    );
-
-                }
-
-            }
-        );
+       intervalLocked =
+           true;
 
 
-    const firstName =
-        noteNames[
-            intervalCurrent.first
-            % 12
-        ];
+       /*
+           Désactivation de tous les boutons
+           après la réponse.
+       */
+
+       document
+           .querySelectorAll(
+               "#intervalAnswers .answer"
+           )
+           .forEach(
+               button => {
+
+                   button.disabled =
+                       true;
 
 
-    const secondName =
-        noteNames[
-            intervalCurrent.second
-            % 12
-        ];
+                   /*
+                       La bonne réponse est
+                       toujours indiquée en vert.
+                   */
+
+                   if (
+                       Number(
+                           button.dataset.semitones
+                       )
+                       ===
+                       intervalCurrent
+                           .interval
+                           .semitones
+                   ) {
+
+                       button.classList.add(
+                           "correct"
+                       );
+
+                   }
+
+               }
+           );
 
 
-    const semitones =
-        intervalCurrent
-            .interval
-            .semitones;
+       /* =====================================================
+          DESCRIPTION DE LA CORRECTION
+          ===================================================== */
+
+       const firstName =
+           noteNames[
+               intervalCurrent.first
+               % 12
+           ];
 
 
-    const description =
-
-        firstName
-        + " → "
-        + secondName
-        + " · "
-        + intervalCurrent.interval.name
-        + " · "
-        + semitones
-        + " demi-ton"
-        + (
-            semitones > 1
-            ? "s"
-            : ""
-        );
+       const secondName =
+           noteNames[
+               intervalCurrent.second
+               % 12
+           ];
 
 
-    if (
-        item.semitones ===
-        semitones
-    ) {
-
-        intervalScore++;
+       const semitones =
+           intervalCurrent
+               .interval
+               .semitones;
 
 
-        $("intervalPrompt")
-            .textContent =
+       const description =
 
-            "✓ Bonne réponse !";
-
-
-        $("intervalFeedback")
-            .textContent =
-
-            description;
-
-    }
-
-    else {
-
-        selectedButton
-            .classList
-            .add(
-                "wrong"
-            );
+           firstName
+           + " → "
+           + secondName
+           + " · "
+           + intervalCurrent
+               .interval
+               .name
+           + " · "
+           + semitones
+           + " demi-ton"
+           + (
+               semitones > 1
+               ? "s"
+               : ""
+           );
 
 
-        $("intervalPrompt")
-            .textContent =
-
-            "✗ Réponse incorrecte";
-
-
-        $("intervalFeedback")
-            .textContent =
-
-            "Correction : "
-            + description;
-
-    }
+       const isCorrect =
+           item.semitones ===
+           semitones;
 
 
-    $("intervalScore")
-        .textContent =
+       /* =====================================================
+          BONNE REPONSE
+          ===================================================== */
 
-        "Score : "
-        + intervalScore
-        + " / "
-        + intervalIndex;
+       if (
+           isCorrect
+       ) {
+
+           intervalScore++;
 
 
-    $("intervalNext")
-        .classList
-        .remove(
-            "hidden"
-        );
+           $("intervalPrompt")
+               .textContent =
 
-}
+               "✓ Bonne réponse !";
+
+
+           $("intervalFeedback")
+               .textContent =
+
+               description;
+
+
+           $("intervalScore")
+               .textContent =
+
+               "Score : "
+               + intervalScore
+               + " / "
+               + intervalIndex;
+
+
+           /*
+               Le bouton reste caché.
+
+               Passage automatique à la
+               question suivante.
+           */
+
+           $("intervalNext")
+               .classList
+               .add(
+                   "hidden"
+               );
+
+
+           setTimeout(
+               function () {
+
+                   nextInterval();
+
+               },
+               450
+           );
+
+       }
+
+
+       /* =====================================================
+          MAUVAISE REPONSE
+          ===================================================== */
+
+       else {
+
+           selectedButton
+               .classList
+               .add(
+                   "wrong"
+               );
+
+
+           $("intervalPrompt")
+               .textContent =
+
+               "✗ Réponse incorrecte";
+
+
+           $("intervalFeedback")
+               .textContent =
+
+               "Correction : "
+               + description;
+
+
+           $("intervalScore")
+               .textContent =
+
+               "Score : "
+               + intervalScore
+               + " / "
+               + intervalIndex;
+
+
+           /*
+               En cas d'erreur :
+               aucun passage automatique.
+
+               L'élève peut examiner la réponse
+               et réécouter l'intervalle.
+           */
+
+           $("intervalNext")
+               .classList
+               .remove(
+                   "hidden"
+               );
+
+       }
+
+   }
 
 
 /* =========================================================
