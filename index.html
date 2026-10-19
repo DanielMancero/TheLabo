@@ -31,7 +31,6 @@
 
 body {
     margin: 0;
-
     background: var(--bg);
     color: var(--ink);
 
@@ -43,14 +42,12 @@ body {
 
 
 /* =========================================================
-   ÉCRANS
+   ECRANS
    ========================================================= */
 
 .screen {
     display: none;
-
     min-height: 100vh;
-
     padding: 28px 16px;
 }
 
@@ -60,9 +57,7 @@ body {
 
 .wrap {
     max-width: 900px;
-
     margin: auto;
-
     text-align: center;
 }
 
@@ -83,13 +78,12 @@ h1 {
 }
 
 h2 {
-    margin: 14px 0;
+    margin: 20px 0 10px;
 }
 
 .subtitle {
     color: var(--muted);
-
-    margin-bottom: 30px;
+    margin-bottom: 26px;
 }
 
 
@@ -119,13 +113,10 @@ h2 {
     border-radius: 14px;
 
     padding: 25px;
-
     min-height: 230px;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
 }
 
@@ -140,36 +131,34 @@ h2 {
 
 .btn {
     border: 0;
-
     border-radius: 9px;
 
     padding: 14px 18px;
 
     font: inherit;
-
     font-weight: 700;
 
     cursor: pointer;
 
     color: var(--ink);
-
     background: #d6dade;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
     filter: brightness(0.94);
 }
 
-.btn:active {
+.btn:active:not(:disabled) {
     transform: scale(0.98);
 }
 
 .btn:focus-visible {
-    outline:
-        4px solid
-        white;
-
+    outline: 4px solid white;
     outline-offset: 3px;
+}
+
+.btn:disabled {
+    cursor: default;
 }
 
 .btn-blue {
@@ -182,13 +171,12 @@ h2 {
 
 .btn-back {
     background: #c9cdd1;
-
     margin: 8px;
 }
 
 
 /* =========================================================
-   OPTIONS ET RÉPONSES
+   OPTIONS
    ========================================================= */
 
 .options {
@@ -202,15 +190,35 @@ h2 {
 
     gap: 10px;
 
-    max-width: 680px;
-
+    max-width: 720px;
     margin: 18px auto;
+}
+
+.meter-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 10px;
+
+    max-width: 720px;
+    margin: 12px auto 28px;
 }
 
 .answer {
     border:
         2px solid
         var(--line);
+
+    min-height: 76px;
+
+    font-size: 20px;
+
+    line-height: 1.5;
 }
 
 .correct {
@@ -232,7 +240,6 @@ h2 {
     min-height: 32px;
 
     font-size: 19px;
-
     font-weight: bold;
 
     margin: 12px;
@@ -242,11 +249,9 @@ h2 {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     gap: 10px;
-
     flex-wrap: wrap;
 
     margin: 12px;
@@ -262,16 +267,21 @@ h2 {
 
 .score {
     font-weight: bold;
-
     margin: 14px;
 }
 
 .feedback {
-    min-height: 55px;
+    min-height: 60px;
 
     line-height: 1.5;
 
     margin: 12px;
+}
+
+.rhythm-visual {
+    font-size: 25px;
+    line-height: 1.8;
+    margin: 8px;
 }
 
 .hidden {
@@ -280,7 +290,6 @@ h2 {
 
 .perfect {
     color: #385d30;
-
     font-weight: 800;
 }
 
@@ -292,7 +301,8 @@ h2 {
 @media (max-width: 650px) {
 
     .grid,
-    .options {
+    .options,
+    .meter-options {
         grid-template-columns: 1fr;
     }
 
@@ -301,9 +311,11 @@ h2 {
     }
 
     .screen {
-        padding:
-            20px
-            12px;
+        padding: 20px 12px;
+    }
+
+    .answer {
+        font-size: 18px;
     }
 }
 
@@ -340,8 +352,6 @@ h2 {
     <div class="grid">
 
 
-        <!-- RYTHME -->
-
         <div class="card">
 
             <div>
@@ -355,9 +365,8 @@ h2 {
                 </h2>
 
                 <p>
-                    Reconnaissance de cellules
-                    rythmiques binaires
-                    et ternaires.
+                    Reconnaissance de fragments
+                    rythmiques binaires et ternaires.
                 </p>
 
             </div>
@@ -373,8 +382,6 @@ h2 {
 
         </div>
 
-
-        <!-- INTERVALLES -->
 
         <div class="card">
 
@@ -432,27 +439,93 @@ h2 {
     </h1>
 
     <p>
-        Choisis la famille rythmique.
+        Choisis la longueur du fragment.
     </p>
 
 
-    <div class="options">
+    <h2>
+        Binaire
+    </h2>
+
+    <p class="subtitle">
+        Pulsation à la noire
+    </p>
+
+
+    <div class="meter-options">
 
         <button
             class="btn btn-blue rhythm-start"
-            data-meter="binary"
+            data-meter="2/4"
             type="button"
         >
-            BINAIRE - 2/4
+            2/4
+            <br>
+            2 pulsations
         </button>
 
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="3/4"
+            type="button"
+        >
+            3/4
+            <br>
+            3 pulsations
+        </button>
 
         <button
             class="btn btn-blue rhythm-start"
-            data-meter="ternary"
+            data-meter="4/4"
             type="button"
         >
-            TERNAIRE - 6/8
+            4/4
+            <br>
+            4 pulsations
+        </button>
+
+    </div>
+
+
+    <h2>
+        Ternaire
+    </h2>
+
+    <p class="subtitle">
+        Pulsation à la noire pointée
+    </p>
+
+
+    <div class="meter-options">
+
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="6/8"
+            type="button"
+        >
+            6/8
+            <br>
+            2 pulsations
+        </button>
+
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="9/8"
+            type="button"
+        >
+            9/8
+            <br>
+            3 pulsations
+        </button>
+
+        <button
+            class="btn btn-blue rhythm-start"
+            data-meter="12/8"
+            type="button"
+        >
+            12/8
+            <br>
+            4 pulsations
         </button>
 
     </div>
@@ -462,7 +535,7 @@ h2 {
         class="btn btn-back homeBtn"
         type="button"
     >
-        RETOUR À L'ACCUEIL
+        RETOUR A L'ACCUEIL
     </button>
 
 </div>
@@ -498,7 +571,7 @@ h2 {
             class="btn btn-blue"
             type="button"
         >
-            🔊 ÉCOUTER
+            🔊 ECOUTER
         </button>
 
 
@@ -565,7 +638,7 @@ h2 {
         class="btn btn-back"
         type="button"
     >
-        CHANGER DE MODE
+        CHANGER DE METRIQUE
     </button>
 
 </div>
@@ -575,7 +648,7 @@ h2 {
 
 
 <!-- =======================================================
-     NIVEAUX D'INTERVALLES
+     NIVEAUX INTERVALLES
      ======================================================= -->
 
 <section
@@ -601,9 +674,8 @@ h2 {
             data-level="1"
             type="button"
         >
-            NIVEAU 1 - REPÈRES
+            NIVEAU 1 - REPERES
         </button>
-
 
         <button
             class="btn btn-green levelBtn"
@@ -613,7 +685,6 @@ h2 {
             NIVEAU 2 - MAJEUR / MINEUR
         </button>
 
-
         <button
             class="btn btn-green levelBtn"
             data-level="3"
@@ -621,7 +692,6 @@ h2 {
         >
             NIVEAU 3 - CHROMATIQUE
         </button>
-
 
         <button
             class="btn btn-green levelBtn"
@@ -638,7 +708,7 @@ h2 {
         class="btn btn-back homeBtn"
         type="button"
     >
-        RETOUR À L'ACCUEIL
+        RETOUR A L'ACCUEIL
     </button>
 
 </div>
@@ -648,7 +718,7 @@ h2 {
 
 
 <!-- =======================================================
-     MODE D'INTERVALLES
+     MODE INTERVALLES
      ======================================================= -->
 
 <section
@@ -673,7 +743,6 @@ h2 {
             ↑ ASCENDANT
         </button>
 
-
         <button
             class="btn btn-green modeBtn"
             data-mode="down"
@@ -682,7 +751,6 @@ h2 {
             ↓ DESCENDANT
         </button>
 
-
         <button
             class="btn btn-green modeBtn"
             data-mode="harmonic"
@@ -690,7 +758,6 @@ h2 {
         >
             ♫ HARMONIQUE
         </button>
-
 
         <button
             class="btn btn-green modeBtn"
@@ -718,7 +785,7 @@ h2 {
 
 
 <!-- =======================================================
-     JEU D'INTERVALLES
+     JEU INTERVALLES
      ======================================================= -->
 
 <section
@@ -744,7 +811,7 @@ h2 {
             class="btn btn-green"
             type="button"
         >
-            🔊 ÉCOUTER
+            🔊 ECOUTER
         </button>
 
 
@@ -831,51 +898,55 @@ h2 {
 
 
 /* =========================================================
-   OUTILS D'INTERFACE
+   OUTILS
    ========================================================= */
 
-const $ =
-    id =>
-        document.getElementById(id);
+function $(id) {
 
+    return document.getElementById(id);
 
-const screens =
-    [
-        ...document.querySelectorAll(
-            ".screen"
-        )
-    ];
+}
 
 
 function show(id) {
 
-    screens.forEach(
-        screen => {
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            screen => {
 
-            screen.classList.toggle(
-                "active",
-                screen.id === id
-            );
+                screen.classList.toggle(
+                    "active",
+                    screen.id === id
+                );
 
-        }
-    );
+            }
+        );
 
 }
 
 
 /* =========================================================
-   NAVIGATION PRINCIPALE
+   NAVIGATION
    ========================================================= */
 
 $("openRhythm").addEventListener(
     "click",
-    () => show("rhythmSetup")
+    function () {
+
+        show("rhythmSetup");
+
+    }
 );
 
 
 $("openIntervals").addEventListener(
     "click",
-    () => show("intervalSetup")
+    function () {
+
+        show("intervalSetup");
+
+    }
 );
 
 
@@ -886,7 +957,11 @@ document
 
             button.addEventListener(
                 "click",
-                () => show("home")
+                function () {
+
+                    show("home");
+
+                }
             );
 
         }
@@ -895,19 +970,31 @@ document
 
 $("rhythmExit").addEventListener(
     "click",
-    () => show("rhythmSetup")
+    function () {
+
+        show("rhythmSetup");
+
+    }
 );
 
 
 $("intervalExit").addEventListener(
     "click",
-    () => show("intervalMode")
+    function () {
+
+        show("intervalMode");
+
+    }
 );
 
 
 $("backLevels").addEventListener(
     "click",
-    () => show("intervalSetup")
+    function () {
+
+        show("intervalSetup");
+
+    }
 );
 
 
@@ -915,21 +1002,41 @@ $("backLevels").addEventListener(
    AUDIO
    ========================================================= */
 
-let audioContext = null;
+let audioContext =
+    null;
 
-let masterGain = null;
+let masterGain =
+    null;
 
 
 function audio() {
 
-    if (!audioContext) {
+    if (
+        audioContext === null
+    ) {
+
+        const AudioContextClass =
+            window.AudioContext
+            ||
+            window.webkitAudioContext;
+
+
+        if (
+            !AudioContextClass
+        ) {
+
+            console.error(
+                "Web Audio API non disponible."
+            );
+
+
+            return null;
+
+        }
+
 
         audioContext =
-            new (
-                window.AudioContext
-                ||
-                window.webkitAudioContext
-            )();
+            new AudioContextClass();
 
 
         masterGain =
@@ -964,12 +1071,24 @@ function audio() {
 
 function setVolume(value) {
 
-    audio();
+    const context =
+        audio();
+
+
+    if (
+        !context
+        ||
+        !masterGain
+    ) {
+
+        return;
+
+    }
 
 
     masterGain.gain.setTargetAtTime(
         Number(value) / 100,
-        audioContext.currentTime,
+        context.currentTime,
         0.01
     );
 
@@ -979,12 +1098,23 @@ function setVolume(value) {
 function tone(
     frequency,
     startTime,
-    duration = 0.18,
-    volume = 0.32
+    duration,
+    volume
 ) {
 
     const context =
         audio();
+
+
+    if (
+        !context
+        ||
+        !masterGain
+    ) {
+
+        return;
+
+    }
 
 
     const oscillator =
@@ -999,8 +1129,10 @@ function tone(
         "sine";
 
 
-    oscillator.frequency.value =
-        frequency;
+    oscillator.frequency.setValueAtTime(
+        frequency,
+        startTime
+    );
 
 
     gain.gain.setValueAtTime(
@@ -1051,7 +1183,7 @@ function tone(
 
 $("rhythmVolume").addEventListener(
     "input",
-    event => {
+    function (event) {
 
         setVolume(
             event.target.value
@@ -1063,7 +1195,7 @@ $("rhythmVolume").addEventListener(
 
 $("intervalVolume").addEventListener(
     "input",
-    event => {
+    function (event) {
 
         setVolume(
             event.target.value
@@ -1079,13 +1211,13 @@ $("intervalVolume").addEventListener(
 
 
 /* =========================================================
-   MÉLANGE
+   MELANGE
    ========================================================= */
 
 function shuffle(array) {
 
     const result =
-        [...array];
+        array.slice();
 
 
     for (
@@ -1104,16 +1236,16 @@ function shuffle(array) {
             );
 
 
-        [
-            result[i],
-            result[j]
+        const temp =
+            result[i];
 
-        ] = [
 
-            result[j],
-            result[i]
+        result[i] =
+            result[j];
 
-        ];
+
+        result[j] =
+            temp;
 
     }
 
@@ -1124,35 +1256,119 @@ function shuffle(array) {
 
 
 /* =========================================================
-   JEU RYTHMIQUE
+   CELLULES RYTHMIQUES
    ========================================================= */
 
-const rhythmData = {
+/*
+    IMPORTANT :
+
+    Une cellule occupe exactement
+    UNE pulsation.
+
+    En binaire :
+    pulsation = noire.
+
+    En ternaire :
+    pulsation = noire pointee.
+
+    "attacks" indique les positions des attaques
+    a l'interieur de cette pulsation.
+
+    Pour eviter les problemes d'affichage Unicode
+    constates precedemment, nous conservons ici
+    uniquement les cinq cellules binaires dont
+    l'affichage est suffisamment stable.
+*/
+
+const rhythmCells = {
 
     binary: [
 
         {
-            name: "2 croches",
-            pattern: [1, 1],
-            visual: "♪ ♪"
+            id: "B1",
+
+            name:
+                "Noire",
+
+            attacks:
+                [
+                    0
+                ],
+
+            visual:
+                "♩"
         },
 
-        {
-            name: "Noire",
-            pattern: [2],
-            visual: "♩"
-        },
 
         {
-            name: "Croche - deux doubles",
-            pattern: [1, 0.5, 0.5],
-            visual: "♪ ♬"
+            id: "B2",
+
+            name:
+                "Deux croches",
+
+            attacks:
+                [
+                    0,
+                    0.5
+                ],
+
+            visual:
+                "♪ ♪"
         },
 
+
         {
-            name: "Deux doubles - croche",
-            pattern: [0.5, 0.5, 1],
-            visual: "♬ ♪"
+            id: "B3",
+
+            name:
+                "Croche + deux doubles",
+
+            attacks:
+                [
+                    0,
+                    0.5,
+                    0.75
+                ],
+
+            visual:
+                "♪ ♬"
+        },
+
+
+        {
+            id: "B4",
+
+            name:
+                "Deux doubles + croche",
+
+            attacks:
+                [
+                    0,
+                    0.25,
+                    0.5
+                ],
+
+            visual:
+                "♬ ♪"
+        },
+
+
+        {
+            id: "B5",
+
+            name:
+                "Quatre doubles",
+
+            attacks:
+                [
+                    0,
+                    0.25,
+                    0.5,
+                    0.75
+                ],
+
+            visual:
+                "♬ ♬"
         }
 
     ],
@@ -1161,27 +1377,70 @@ const rhythmData = {
     ternary: [
 
         {
-            name: "3 croches",
-            pattern: [1, 1, 1],
-            visual: "♪ ♪ ♪"
+            id: "T1",
+
+            name:
+                "Noire pointee",
+
+            attacks:
+                [
+                    0
+                ],
+
+            visual:
+                "♩."
         },
 
-        {
-            name: "Noire pointée",
-            pattern: [3],
-            visual: "♩."
-        },
 
         {
-            name: "Noire - croche",
-            pattern: [2, 1],
-            visual: "♩ ♪"
+            id: "T2",
+
+            name:
+                "Trois croches",
+
+            attacks:
+                [
+                    0,
+                    1 / 3,
+                    2 / 3
+                ],
+
+            visual:
+                "♪ ♪ ♪"
         },
 
+
         {
-            name: "Croche - noire",
-            pattern: [1, 2],
-            visual: "♪ ♩"
+            id: "T3",
+
+            name:
+                "Noire + croche",
+
+            attacks:
+                [
+                    0,
+                    2 / 3
+                ],
+
+            visual:
+                "♩ ♪"
+        },
+
+
+        {
+            id: "T4",
+
+            name:
+                "Croche + noire",
+
+            attacks:
+                [
+                    0,
+                    1 / 3
+                ],
+
+            visual:
+                "♪ ♩"
         }
 
     ]
@@ -1189,8 +1448,164 @@ const rhythmData = {
 };
 
 
+/* =========================================================
+   METRIQUES
+   ========================================================= */
+
+const rhythmMeters = {
+
+    "2/4": {
+        family: "binary",
+        beats: 2
+    },
+
+    "3/4": {
+        family: "binary",
+        beats: 3
+    },
+
+    "4/4": {
+        family: "binary",
+        beats: 4
+    },
+
+    "6/8": {
+        family: "ternary",
+        beats: 2
+    },
+
+    "9/8": {
+        family: "ternary",
+        beats: 3
+    },
+
+    "12/8": {
+        family: "ternary",
+        beats: 4
+    }
+
+};
+
+
+/* =========================================================
+   GENERATEUR DE FRAGMENT
+   ========================================================= */
+
+function generateRhythm(meter) {
+
+    const config =
+        rhythmMeters[meter];
+
+
+    if (
+        !config
+    ) {
+
+        throw new Error(
+            "Metrique inconnue : "
+            + meter
+        );
+
+    }
+
+
+    const cells =
+        rhythmCells[
+            config.family
+        ];
+
+
+    const selectedCells =
+        [];
+
+
+    const attacks =
+        [];
+
+
+    for (
+        let beatIndex = 0;
+
+        beatIndex <
+        config.beats;
+
+        beatIndex++
+    ) {
+
+        const randomIndex =
+            Math.floor(
+                Math.random()
+                * cells.length
+            );
+
+
+        const cell =
+            cells[randomIndex];
+
+
+        selectedCells.push(
+            cell
+        );
+
+
+        cell.attacks.forEach(
+            localAttack => {
+
+                attacks.push(
+                    beatIndex
+                    + localAttack
+                );
+
+            }
+        );
+
+    }
+
+
+    return {
+
+        id:
+            selectedCells
+                .map(
+                    cell =>
+                        cell.id
+                )
+                .join("-"),
+
+        visual:
+            selectedCells
+                .map(
+                    cell =>
+                        cell.visual
+                )
+                .join(
+                    "  |  "
+                ),
+
+        name:
+            selectedCells
+                .map(
+                    cell =>
+                        cell.name
+                )
+                .join(
+                    " | "
+                ),
+
+        attacks:
+            attacks
+
+    };
+
+}
+
+
+/* =========================================================
+   ETAT RYTHMIQUE
+   ========================================================= */
+
 let rhythmMeter =
-    "binary";
+    "2/4";
 
 let rhythmPool =
     [];
@@ -1208,6 +1623,10 @@ let rhythmLocked =
     false;
 
 
+/* =========================================================
+   BOUTONS DE METRIQUE
+   ========================================================= */
+
 document
     .querySelectorAll(
         ".rhythm-start"
@@ -1217,10 +1636,14 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                function () {
+
+                    const meter =
+                        button.dataset.meter;
+
 
                     startRhythm(
-                        button.dataset.meter
+                        meter
                     );
 
                 }
@@ -1229,6 +1652,10 @@ document
         }
     );
 
+
+/* =========================================================
+   DEMARRAGE DU JEU RYTHMIQUE
+   ========================================================= */
 
 function startRhythm(meter) {
 
@@ -1248,24 +1675,59 @@ function startRhythm(meter) {
         [];
 
 
-    while (
-        rhythmPool.length < 10
+    rhythmCurrent =
+        null;
+
+
+    rhythmLocked =
+        false;
+
+
+    /*
+        Creation de dix questions.
+    */
+
+    for (
+        let i = 0;
+
+        i < 10;
+
+        i++
     ) {
 
-        rhythmPool.push(
-            ...shuffle(
-                rhythmData[meter]
+        let candidate;
+
+        let attempts =
+            0;
+
+
+        do {
+
+            candidate =
+                generateRhythm(
+                    rhythmMeter
+                );
+
+
+            attempts++;
+
+        }
+        while (
+            rhythmPool.some(
+                item =>
+                    item.id ===
+                    candidate.id
             )
+            &&
+            attempts < 100
+        );
+
+
+        rhythmPool.push(
+            candidate
         );
 
     }
-
-
-    rhythmPool =
-        rhythmPool.slice(
-            0,
-            10
-        );
 
 
     show(
@@ -1278,10 +1740,92 @@ function startRhythm(meter) {
 }
 
 
+/* =========================================================
+   PROPOSITIONS RYTHMIQUES
+   ========================================================= */
+
+function makeRhythmChoices() {
+
+    const choices =
+        [
+            rhythmCurrent
+        ];
+
+
+    let attempts =
+        0;
+
+
+    while (
+        choices.length < 4
+        &&
+        attempts < 300
+    ) {
+
+        attempts++;
+
+
+        const candidate =
+            generateRhythm(
+                rhythmMeter
+            );
+
+
+        const duplicate =
+            choices.some(
+                item =>
+                    item.id ===
+                    candidate.id
+            );
+
+
+        if (
+            !duplicate
+        ) {
+
+            choices.push(
+                candidate
+            );
+
+        }
+
+    }
+
+
+    /*
+        Securite :
+        toutes les metriques utilisees ici ont
+        largement assez de combinaisons pour
+        produire quatre propositions.
+    */
+
+    if (
+        choices.length < 4
+    ) {
+
+        console.error(
+            "Impossible de creer quatre propositions rythmiques."
+        );
+
+    }
+
+
+    return shuffle(
+        choices
+    );
+
+}
+
+
+/* =========================================================
+   QUESTION RYTHMIQUE
+   ========================================================= */
+
 function nextRhythm() {
 
     if (
-        rhythmIndex >= 10
+        rhythmIndex >=
+        rhythmPool.length
     ) {
 
         finishRhythm();
@@ -1304,23 +1848,41 @@ function nextRhythm() {
         false;
 
 
-    $("rhythmQuestion").textContent =
+    $("rhythmQuestion")
+        .textContent =
+
         "Question "
         + rhythmIndex
         + " / 10 · "
-        + (
-            rhythmMeter === "binary"
-            ? "2/4"
-            : "6/8"
-        );
+        + rhythmMeter;
 
 
-    $("rhythmPrompt").textContent =
+    $("rhythmPrompt")
+        .textContent =
+
         "Quel rythme entends-tu ?";
 
 
-    $("rhythmFeedback").textContent =
+    $("rhythmFeedback")
+        .innerHTML =
         "";
+
+
+    $("rhythmScore")
+        .textContent =
+
+        "Score : "
+        + rhythmScore
+        + " / "
+        + (
+            rhythmIndex - 1
+        );
+
+
+    $("rhythmNext")
+        .textContent =
+
+        "QUESTION SUIVANTE";
 
 
     $("rhythmNext")
@@ -1338,9 +1900,11 @@ function nextRhythm() {
         "";
 
 
-    rhythmData[
-        rhythmMeter
-    ].forEach(
+    const choices =
+        makeRhythmChoices();
+
+
+    choices.forEach(
         item => {
 
             const button =
@@ -1358,14 +1922,16 @@ function nextRhythm() {
 
 
             button.textContent =
-                item.visual
-                + "   "
-                + item.name;
+                item.visual;
+
+
+            button.dataset.answerId =
+                item.id;
 
 
             button.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     answerRhythm(
                         item,
@@ -1383,20 +1949,34 @@ function nextRhythm() {
         }
     );
 
-
-    $("rhythmScore").textContent =
-        "Score : "
-        + rhythmScore
-        + " / "
-        + (rhythmIndex - 1);
-
 }
 
 
+/* =========================================================
+   LECTURE RYTHMIQUE
+   ========================================================= */
+
 function playRhythm() {
 
-    if (!rhythmCurrent) {
+    if (
+        !rhythmCurrent
+    ) {
+
         return;
+
+    }
+
+
+    const context =
+        audio();
+
+
+    if (
+        !context
+    ) {
+
+        return;
+
     }
 
 
@@ -1405,30 +1985,41 @@ function playRhythm() {
     );
 
 
-    let time =
-        audio().currentTime
-        + 0.05;
+    /*
+        Tempo fixe provisoire :
+        100 pulsations par minute.
+
+        60 / 100 = 0,6 seconde
+        par pulsation.
+    */
+
+    const beatDuration =
+        0.60;
 
 
-    const unit =
-        0.26;
+    const startTime =
+        context.currentTime
+        + 0.08;
 
 
-    rhythmCurrent.pattern
+    rhythmCurrent
+        .attacks
         .forEach(
-            length => {
+            attackPosition => {
+
+                const noteTime =
+                    startTime
+                    +
+                    attackPosition
+                    * beatDuration;
+
 
                 tone(
                     740,
-                    time,
-                    0.09,
+                    noteTime,
+                    0.075,
                     0.28
                 );
-
-
-                time +=
-                    length
-                    * unit;
 
             }
         );
@@ -1439,136 +2030,259 @@ function playRhythm() {
 $("playRhythm")
     .addEventListener(
         "click",
-        playRhythm
+        function () {
+
+            playRhythm();
+
+        }
     );
 
 
-function answerRhythm(
-    item,
-    selectedButton
-) {
+/* =========================================================
+   REPONSE RYTHMIQUE
+   ========================================================= */
 
-    if (rhythmLocked) {
-        return;
-    }
+   /* =========================================================
+      REPONSE RYTHMIQUE
+      ========================================================= */
+
+   function answerRhythm(
+       item,
+       selectedButton
+   ) {
+
+       if (
+           rhythmLocked
+           ||
+           !rhythmCurrent
+       ) {
+
+           return;
+
+       }
+
+
+       rhythmLocked =
+           true;
+
+
+       const correctId =
+           rhythmCurrent.id;
+
+
+       /*
+           On bloque tous les boutons
+           après la réponse.
+       */
+
+       document
+           .querySelectorAll(
+               "#rhythmAnswers .answer"
+           )
+           .forEach(
+               button => {
+
+                   button.disabled =
+                       true;
+
+
+                   /*
+                       La bonne réponse
+                       apparaît en vert.
+                   */
+
+                   if (
+                       button.dataset.answerId ===
+                       correctId
+                   ) {
+
+                       button.classList.add(
+                           "correct"
+                       );
+
+                   }
+
+               }
+           );
+
+
+       const isCorrect =
+           item.id ===
+           correctId;
+
+
+       /* =====================================================
+          BONNE REPONSE
+          ===================================================== */
+
+       if (
+           isCorrect
+       ) {
+
+           rhythmScore++;
+
+
+           $("rhythmPrompt")
+               .textContent =
+
+               "✓ Bonne réponse !";
+
+
+           $("rhythmFeedback")
+               .innerHTML =
+
+               '<div class="rhythm-visual">'
+               + rhythmCurrent.visual
+               + "</div>";
+
+
+           $("rhythmScore")
+               .textContent =
+
+               "Score : "
+               + rhythmScore
+               + " / "
+               + rhythmIndex;
+
+
+           /*
+               Le bouton reste masque.
+
+               Passage automatique à la question
+               suivante après une courte correction.
+           */
+
+           $("rhythmNext")
+               .classList
+               .add(
+                   "hidden"
+               );
+
+
+           setTimeout(
+               function () {
+
+                   nextRhythm();
+
+               },
+               850
+           );
+
+       }
+
+
+       /* =====================================================
+          MAUVAISE REPONSE
+          ===================================================== */
+
+       else {
+
+           selectedButton
+               .classList
+               .add(
+                   "wrong"
+               );
+
+
+           $("rhythmPrompt")
+               .textContent =
+
+               "✗ Réponse incorrecte";
+
+
+           $("rhythmFeedback")
+               .innerHTML =
+
+               "Bonne réponse :"
+
+               +
+
+               '<div class="rhythm-visual">'
+               + rhythmCurrent.visual
+               + "</div>";
+
+
+           $("rhythmScore")
+               .textContent =
+
+               "Score : "
+               + rhythmScore
+               + " / "
+               + rhythmIndex;
+
+
+           /*
+               Ici aucun passage automatique.
+
+               L'élève peut observer la correction,
+               éventuellement réécouter le rythme,
+               puis continuer manuellement.
+           */
+
+           $("rhythmNext")
+               .classList
+               .remove(
+                   "hidden"
+               );
+
+       }
+
+   }
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+   ========================================================= */
+
+$("rhythmNext")
+    .addEventListener(
+        "click",
+        function () {
+
+            if (
+                rhythmCurrent ===
+                null
+            ) {
+
+                startRhythm(
+                    rhythmMeter
+                );
+
+            }
+
+            else {
+
+                nextRhythm();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   FIN RYTHME
+   ========================================================= */
+
+function finishRhythm() {
+
+    rhythmCurrent =
+        null;
 
 
     rhythmLocked =
         true;
 
 
-    document
-        .querySelectorAll(
-            "#rhythmAnswers .answer"
-        )
-        .forEach(
-            button => {
+    $("rhythmQuestion")
+        .textContent =
 
-                button.disabled =
-                    true;
-
-
-                if (
-                    button.textContent
-                        .includes(
-                            rhythmCurrent.name
-                        )
-                ) {
-
-                    button.classList.add(
-                        "correct"
-                    );
-
-                }
-
-            }
-        );
-
-
-    if (
-        item.name ===
-        rhythmCurrent.name
-    ) {
-
-        rhythmScore++;
-
-
-        $("rhythmPrompt").textContent =
-            "✓ Bonne réponse !";
-
-
-        $("rhythmFeedback").textContent =
-            rhythmCurrent.visual
-            + " · "
-            + rhythmCurrent.name;
-
-
-        $("rhythmScore").textContent =
-            "Score : "
-            + rhythmScore
-            + " / "
-            + rhythmIndex;
-
-
-        setTimeout(
-            nextRhythm,
-            850
-        );
-
-    }
-
-    else {
-
-        selectedButton
-            .classList
-            .add(
-                "wrong"
-            );
-
-
-        $("rhythmPrompt").textContent =
-            "✗ Réponse incorrecte";
-
-
-        $("rhythmFeedback").textContent =
-            "Bonne réponse : "
-            + rhythmCurrent.visual
-            + " · "
-            + rhythmCurrent.name;
-
-
-        $("rhythmScore").textContent =
-            "Score : "
-            + rhythmScore
-            + " / "
-            + rhythmIndex;
-
-
-        $("rhythmNext")
-            .classList
-            .remove(
-                "hidden"
-            );
-
-    }
-
-}
-
-
-$("rhythmNext")
-    .addEventListener(
-        "click",
-        nextRhythm
-    );
-
-
-function finishRhythm() {
-
-    $("rhythmQuestion").textContent =
         "Manche terminée";
 
 
-    $("rhythmPrompt").textContent =
+    $("rhythmPrompt")
+        .textContent =
+
         "Score final : "
         + rhythmScore
         + " / 10";
@@ -1578,87 +2292,118 @@ function finishRhythm() {
         rhythmScore === 10
     ) {
 
-        $("rhythmFeedback").innerHTML =
+        $("rhythmFeedback")
+            .innerHTML =
+
             '<span class="perfect">'
-            + '★ BRAVO · MANCHE PARFAITE ! ★'
-            + '</span>';
+            + "★ BRAVO · MANCHE PARFAITE ! ★"
+            + "</span>";
 
     }
 
     else {
 
-        $("rhythmFeedback").textContent =
+        $("rhythmFeedback")
+            .textContent =
+
             "Recommence pour améliorer ton score.";
 
     }
 
 
-    $("rhythmAnswers").innerHTML =
+    $("rhythmAnswers")
+        .innerHTML =
         "";
 
 
-    const next =
-        $("rhythmNext");
+    $("rhythmScore")
+        .textContent =
+
+        "Score : "
+        + rhythmScore
+        + " / 10";
 
 
-    next.textContent =
+    $("rhythmNext")
+        .textContent =
+
         "REJOUER";
 
 
-    next.classList.remove(
-        "hidden"
-    );
-
-
-    next.onclick =
-        () => {
-
-            next.onclick =
-                null;
-
-
-            next.textContent =
-                "QUESTION SUIVANTE";
-
-
-            startRhythm(
-                rhythmMeter
-            );
-
-        };
+    $("rhythmNext")
+        .classList
+        .remove(
+            "hidden"
+        );
 
 }
 
 
 /* =========================================================
-   JEU D'INTERVALLES
+   DONNEES INTERVALLES
    ========================================================= */
 
 const intervals = [
 
-    { semitones: 1, name: "2de mineure" },
+    {
+        semitones: 1,
+        name: "2de mineure"
+    },
 
-    { semitones: 2, name: "2de majeure" },
+    {
+        semitones: 2,
+        name: "2de majeure"
+    },
 
-    { semitones: 3, name: "3ce mineure" },
+    {
+        semitones: 3,
+        name: "3ce mineure"
+    },
 
-    { semitones: 4, name: "3ce majeure" },
+    {
+        semitones: 4,
+        name: "3ce majeure"
+    },
 
-    { semitones: 5, name: "4te juste" },
+    {
+        semitones: 5,
+        name: "4te juste"
+    },
 
-    { semitones: 6, name: "Triton" },
+    {
+        semitones: 6,
+        name: "Triton"
+    },
 
-    { semitones: 7, name: "5te juste" },
+    {
+        semitones: 7,
+        name: "5te juste"
+    },
 
-    { semitones: 8, name: "6te mineure" },
+    {
+        semitones: 8,
+        name: "6te mineure"
+    },
 
-    { semitones: 9, name: "6te majeure" },
+    {
+        semitones: 9,
+        name: "6te majeure"
+    },
 
-    { semitones: 10, name: "7e mineure" },
+    {
+        semitones: 10,
+        name: "7e mineure"
+    },
 
-    { semitones: 11, name: "7e majeure" },
+    {
+        semitones: 11,
+        name: "7e majeure"
+    },
 
-    { semitones: 12, name: "Octave juste" }
+    {
+        semitones: 12,
+        name: "Octave juste"
+    }
 
 ];
 
@@ -1719,18 +2464,20 @@ const levels = {
 
 
 const noteNames = [
+
     "Do",
-    "Do♯",
+    "Do♯/Ré♭",
     "Ré",
-    "Mi♭",
+    "Ré/♯Mi♭",
     "Mi",
     "Fa",
-    "Fa♯",
+    "Fa♯/Sol♭",
     "Sol",
-    "La♭",
+    "Sol♯/La♭",
     "La",
-    "Si♭",
+    "La♯/Si♭",
     "Si"
+
 ];
 
 
@@ -1757,7 +2504,7 @@ let intervalLocked =
 
 
 /* =========================================================
-   NIVEAUX
+   BOUTONS NIVEAUX
    ========================================================= */
 
 document
@@ -1769,7 +2516,7 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     intervalLevel =
                         Number(
@@ -1789,7 +2536,7 @@ document
 
 
 /* =========================================================
-   MODES
+   BOUTONS MODES
    ========================================================= */
 
 document
@@ -1801,7 +2548,7 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                function () {
 
                     intervalMode =
                         button.dataset.mode;
@@ -1819,20 +2566,22 @@ document
 function allowedIntervals() {
 
     return intervals.filter(
-        interval =>
+        interval => {
 
-            levels[
+            return levels[
                 intervalLevel
             ].includes(
                 interval.semitones
-            )
+            );
+
+        }
     );
 
 }
 
 
 /* =========================================================
-   DÉMARRER LES INTERVALLES
+   DEMARRER INTERVALLES
    ========================================================= */
 
 function startIntervals() {
@@ -1847,6 +2596,14 @@ function startIntervals() {
 
     intervalPool =
         [];
+
+
+    intervalCurrent =
+        null;
+
+
+    intervalLocked =
+        false;
 
 
     const allowed =
@@ -1884,7 +2641,7 @@ function startIntervals() {
 
 
 /* =========================================================
-   NOUVELLE QUESTION D'INTERVALLE
+   QUESTION INTERVALLE
    ========================================================= */
 
 function nextInterval() {
@@ -1937,14 +2694,9 @@ function nextInterval() {
     }
 
 
-    /*
-        Tessiture :
-        MIDI 57 = La3
-        MIDI 81 = La5
-    */
-
     const low =
         57;
+
 
     const high =
         81;
@@ -1992,7 +2744,8 @@ function nextInterval() {
 
     const secondNote =
 
-        actualMode === "down"
+        actualMode ===
+        "down"
 
         ? firstNote
             - interval.semitones
@@ -2022,20 +2775,41 @@ function nextInterval() {
         false;
 
 
-    $("intervalQuestion").textContent =
+    $("intervalQuestion")
+        .textContent =
+
         "Question "
         + intervalIndex
-        + " / 10"
-        + " · Niveau "
+        + " / 10 · Niveau "
         + intervalLevel;
 
 
-    $("intervalPrompt").textContent =
+    $("intervalPrompt")
+        .textContent =
+
         "Quel intervalle entends-tu ?";
 
 
-    $("intervalFeedback").textContent =
+    $("intervalFeedback")
+        .textContent =
         "";
+
+
+    $("intervalScore")
+        .textContent =
+
+        "Score : "
+        + intervalScore
+        + " / "
+        + (
+            intervalIndex - 1
+        );
+
+
+    $("intervalNext")
+        .textContent =
+
+        "QUESTION SUIVANTE";
 
 
     $("intervalNext")
@@ -2076,12 +2850,14 @@ function nextInterval() {
 
 
                 button.dataset.semitones =
-                    item.semitones;
+                    String(
+                        item.semitones
+                    );
 
 
                 button.addEventListener(
                     "click",
-                    () => {
+                    function () {
 
                         answerInterval(
                             item,
@@ -2099,13 +2875,6 @@ function nextInterval() {
             }
         );
 
-
-    $("intervalScore").textContent =
-        "Score : "
-        + intervalScore
-        + " / "
-        + (intervalIndex - 1);
-
 }
 
 
@@ -2118,20 +2887,40 @@ function midiToHz(midi) {
     return 440
         * Math.pow(
             2,
-            (midi - 69) / 12
+            (
+                midi - 69
+            )
+            / 12
         );
 
 }
 
 
 /* =========================================================
-   ÉCOUTER L'INTERVALLE
+   LECTURE INTERVALLE
    ========================================================= */
 
 function playInterval() {
 
-    if (!intervalCurrent) {
+    if (
+        !intervalCurrent
+    ) {
+
         return;
+
+    }
+
+
+    const context =
+        audio();
+
+
+    if (
+        !context
+    ) {
+
+        return;
+
     }
 
 
@@ -2141,7 +2930,7 @@ function playInterval() {
 
 
     const time =
-        audio().currentTime
+        context.currentTime
         + 0.05;
 
 
@@ -2151,22 +2940,32 @@ function playInterval() {
     ) {
 
         tone(
+
             midiToHz(
                 intervalCurrent.first
             ),
+
             time,
+
             0.70,
+
             0.24
+
         );
 
 
         tone(
+
             midiToHz(
                 intervalCurrent.second
             ),
+
             time,
+
             0.70,
+
             0.24
+
         );
 
     }
@@ -2174,22 +2973,32 @@ function playInterval() {
     else {
 
         tone(
+
             midiToHz(
                 intervalCurrent.first
             ),
+
             time,
+
             0.50,
+
             0.32
+
         );
 
 
         tone(
+
             midiToHz(
                 intervalCurrent.second
             ),
+
             time + 0.62,
+
             0.50,
+
             0.32
+
         );
 
     }
@@ -2200,12 +3009,16 @@ function playInterval() {
 $("playInterval")
     .addEventListener(
         "click",
-        playInterval
+        function () {
+
+            playInterval();
+
+        }
     );
 
 
 /* =========================================================
-   RÉPONSE INTERVALLE
+   REPONSE INTERVALLE
    ========================================================= */
 
 function answerInterval(
@@ -2215,8 +3028,12 @@ function answerInterval(
 
     if (
         intervalLocked
+        ||
+        !intervalCurrent
     ) {
+
         return;
+
     }
 
 
@@ -2269,24 +3086,24 @@ function answerInterval(
         ];
 
 
+    const semitones =
+        intervalCurrent
+            .interval
+            .semitones;
+
+
     const description =
 
         firstName
         + " → "
         + secondName
         + " · "
-        + intervalCurrent
-            .interval
-            .name
+        + intervalCurrent.interval.name
         + " · "
-        + intervalCurrent
-            .interval
-            .semitones
+        + semitones
         + " demi-ton"
         + (
-            intervalCurrent
-                .interval
-                .semitones > 1
+            semitones > 1
             ? "s"
             : ""
         );
@@ -2294,33 +3111,22 @@ function answerInterval(
 
     if (
         item.semitones ===
-        intervalCurrent
-            .interval
-            .semitones
+        semitones
     ) {
 
         intervalScore++;
 
 
-        $("intervalPrompt").textContent =
+        $("intervalPrompt")
+            .textContent =
+
             "✓ Bonne réponse !";
 
 
-        $("intervalFeedback").textContent =
+        $("intervalFeedback")
+            .textContent =
+
             description;
-
-
-        $("intervalScore").textContent =
-            "Score : "
-            + intervalScore
-            + " / "
-            + intervalIndex;
-
-
-        setTimeout(
-            nextInterval,
-            900
-        );
 
     }
 
@@ -2333,55 +3139,90 @@ function answerInterval(
             );
 
 
-        $("intervalPrompt").textContent =
+        $("intervalPrompt")
+            .textContent =
+
             "✗ Réponse incorrecte";
 
 
-        $("intervalFeedback").textContent =
+        $("intervalFeedback")
+            .textContent =
+
             "Correction : "
             + description;
 
-
-        $("intervalScore").textContent =
-            "Score : "
-            + intervalScore
-            + " / "
-            + intervalIndex;
-
-
-        $("intervalNext")
-            .classList
-            .remove(
-                "hidden"
-            );
-
     }
+
+
+    $("intervalScore")
+        .textContent =
+
+        "Score : "
+        + intervalScore
+        + " / "
+        + intervalIndex;
+
+
+    $("intervalNext")
+        .classList
+        .remove(
+            "hidden"
+        );
 
 }
 
 
 /* =========================================================
-   QUESTION SUIVANTE
+   QUESTION SUIVANTE INTERVALLE
    ========================================================= */
 
 $("intervalNext")
     .addEventListener(
         "click",
-        nextInterval
+        function () {
+
+            if (
+                intervalCurrent ===
+                null
+            ) {
+
+                startIntervals();
+
+            }
+
+            else {
+
+                nextInterval();
+
+            }
+
+        }
     );
 
 
 /* =========================================================
-   FIN DU JEU D'INTERVALLES
+   FIN INTERVALLES
    ========================================================= */
 
 function finishIntervals() {
 
-    $("intervalQuestion").textContent =
+    intervalCurrent =
+        null;
+
+
+    intervalLocked =
+        true;
+
+
+    $("intervalQuestion")
+        .textContent =
+
         "Manche terminée";
 
 
-    $("intervalPrompt").textContent =
+    $("intervalPrompt")
+        .textContent =
+
         "Score final : "
         + intervalScore
         + " / 10";
@@ -2391,56 +3232,84 @@ function finishIntervals() {
         intervalScore === 10
     ) {
 
-        $("intervalFeedback").innerHTML =
+        $("intervalFeedback")
+            .innerHTML =
+
             '<span class="perfect">'
-            + '★ BRAVO · MANCHE PARFAITE ! ★'
-            + '</span>';
+            + "★ BRAVO · MANCHE PARFAITE ! ★"
+            + "</span>";
 
     }
 
     else {
 
-        $("intervalFeedback").textContent =
+        $("intervalFeedback")
+            .textContent =
+
             "Recommence pour améliorer ton score.";
 
     }
 
 
-    $("intervalAnswers").innerHTML =
+    $("intervalAnswers")
+        .innerHTML =
         "";
 
 
-    const next =
-        $("intervalNext");
+    $("intervalScore")
+        .textContent =
+
+        "Score : "
+        + intervalScore
+        + " / 10";
 
 
-    next.textContent =
+    $("intervalNext")
+        .textContent =
+
         "REJOUER";
 
 
-    next.classList.remove(
-        "hidden"
-    );
-
-
-    next.onclick =
-        () => {
-
-            next.onclick =
-                null;
-
-
-            next.textContent =
-                "QUESTION SUIVANTE";
-
-
-            startIntervals();
-
-        };
+    $("intervalNext")
+        .classList
+        .remove(
+            "hidden"
+        );
 
 }
+
+
+/* =========================================================
+   DIAGNOSTIC
+   ========================================================= */
+
+console.log(
+    "TheLabo : script charge."
+);
+
+console.log(
+    "Bouton Rythme :",
+    Boolean(
+        $("openRhythm")
+    )
+);
+
+console.log(
+    "Bouton Intervalles :",
+    Boolean(
+        $("openIntervals")
+    )
+);
+
+console.log(
+    "Metriques disponibles :",
+    document.querySelectorAll(
+        ".rhythm-start"
+    ).length
+);
 
 </script>
 
 </body>
+
 </html>
